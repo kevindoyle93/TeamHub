@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>60</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>ClubOfficial
+--
+_*Fields*_
+name: String
+club: String
+phoneNumber: Integer
+email: String
+--
+_*Methods*_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>60</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Team
+--
+_*Fields*_
+name: String
+crest: Image
+league: League
+manager: ClubOfficial
+secretary: ClubOfficial
+pitch: Pitch
+primaryColour: Color
+secondaryColour: Color
+stats: LeagueStats
+--
+_*Methods*_
+getStats()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>60</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>League
+--
+_*Fields*_
+name: String
+teams: Teams[]
+
+--
+_*Methods*_
+getTeamsOrder()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>60</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Pitch
+--
+_*Fields*_
+name: String
+address: String
+playable: Boolean
+--
+_*Methods*_
+isPlayable() : String
+findOnMap()</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
