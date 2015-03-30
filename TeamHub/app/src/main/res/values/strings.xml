@@ -1,6 +1,53 @@
 <resources>
     <string name="app_name">TeamHub</string>
 
+
+    // These are placeholders, they would normally be taken from a database/JSON
+    // Title menu
+    <string name="team_name">Grange Woodbine F.C.</string>
+    <string name="crest_content_description">Crest</string>
+
+    // Next fixture
+    <string name="next_fixture">Next Fixture</string>
+    <string name="home_team">Grange Woodbine F.C.</string>
+    <string name="versus">V</string>
+    <string name="away_team">Howth Celtic F.C.</string>
+    <string name="location_and_time">Edenmore Crescent, 2.00pm</string>
+
+    // League table
+    <string name="league_table">League Table</string>
+    <string name="team">Team</string>
+    <string name="played">Played</string>
+    <string name="points">Points</string>
+    <string name="position_1">1.</string>
+    <string name="position_2">2.</string>
+    <string name="position_3">3.</string>
+    <string name="position_1_team">Grange Woodbine</string>
+    <string name="position_2_team">Howth Celtic</string>
+    <string name="position_3_team">Mourne Celtic</string>
+    <string name="played_1">16</string>
+    <string name="played_2">12</string>
+    <string name="played_3">18</string>
+    <string name="points_1">39</string>
+    <string name="points_2">31</string>
+    <string name="points_3">31</string>
+
+    // Training
+    <string name="training">Training</string>
+    <string name="training_location">Grange Woodbine Astro</string>
+    <string name="training_start_time">8.30pm</string>
+    <string name="training_end_time">10.00pm</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main_activity2">MainActivity2Activity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
 </resources>
