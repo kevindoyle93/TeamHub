@@ -5,21 +5,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 
-public class MainActivity2Activity extends ActionBarActivity
+public class MyActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -34,8 +29,9 @@ public class MainActivity2Activity extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_activity2);
+        setContentView(R.layout.activity_my);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -49,23 +45,51 @@ public class MainActivity2Activity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+
+        Fragment objFragment = null;
+
+        switch (position) {
+
+            case 0:
+                objFragment = new HomeFragment();
+                break;
+            case 1:
+                objFragment = new ResultsAndFixturesFragment();
+                break;
+            case 2:
+                objFragment = new LeagueTablesFragment();
+                break;
+            case 3:
+                objFragment = new TrainingFragment();
+                break;
+            case 4:
+                objFragment = new ContactsFragment();
+                break;
+            case 5:
+                objFragment = new SettingsFragment();
+                break;
+        }
+
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, objFragment)
                 .commit();
     }
 
     public void onSectionAttached(int number) {
+
+        /* TODO: Find out if I need all 6 options here */
+
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
+                mTitle = getString(R.string.menu_option1);
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = getString(R.string.menu_option2);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = getString(R.string.menu_option3);
                 break;
         }
     }
@@ -78,18 +102,21 @@ public class MainActivity2Activity extends ActionBarActivity
     }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main_activity2, menu);
+            getMenuInflater().inflate(R.menu.my, menu);
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -98,13 +125,14 @@ public class MainActivity2Activity extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        /* noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
+        } */
 
         return super.onOptionsItemSelected(item);
     }
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -134,14 +162,14 @@ public class MainActivity2Activity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_activity2, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_my, container, false);
             return rootView;
         }
 
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((MainActivity2Activity) activity).onSectionAttached(
+            ((MyActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
