@@ -1,0 +1,132 @@
+{
+	"offset":0,
+	"results": [
+		{
+			"goals_against": "15",
+			"goal_difference": "35",
+			"lost": "1",
+			"won": "12",
+			"team": "Grange Woodbine",
+			"drawn": "2",
+			"played": "15",
+			"goals_for": "50",
+			"points": "38"
+		},
+		/*{
+			"goals_against": "32",
+			"goal_difference": "3",
+			"lost": "6",
+			"won": "10",
+			"team": "Mourne Celtic",
+			"drawn": "1",
+			"played": "17",
+			"goals_for": "35",
+			"points": "31"
+		},
+		{
+			"goals_against": "22",
+			"goal_difference": "20",
+			"lost": "4",
+			"won": "9",
+			"team": "Newlands Celtic",
+			"drawn": "0",
+			"played": "13",
+			"goals_for": "42",
+			"points": "27"
+		},
+		{
+			"goals_against": "13",
+			"goal_difference": "47",
+			"lost": "1",
+			"won": "8",
+			"team": "Howth Celtic",
+			"drawn": "1",
+			"played": "10",
+			"goals_for": "60",
+			"points": "25"
+		},
+		{
+			"goals_against": "31",
+			"goal_difference": "-3",
+			"lost": "5",
+			"won": "8",
+			"team": "Belclare Celtic",
+			"drawn": "1",
+			"played": "14",
+			"goals_for": "28",
+			"points": "25"
+		},
+		{
+			"goals_against": "40",
+			"goal_difference": "8",
+			"lost": "7",
+			"won": "8",
+			"team": "St.Itas AFC",
+			"drawn": "0",
+			"played": "15",
+			"goals_for": "48",
+			"points": "24"
+		},
+		{
+			"goals_against": "30",
+			"goal_difference": "-8",
+			"lost": "8",
+			"won": "4",
+			"team": "Dublin Celtic FC",
+			"drawn": "4",
+			"played": "16",
+			"goals_for": "22",
+			"points": "16"
+		},
+		{
+			"goals_against": "36",
+			"goal_difference": "-12",
+			"lost": "6",
+			"won": "5",
+			"team": "Kilmore Celtic FC",
+			"drawn": "1",
+			"played": "12",
+			"goals_for": "24",
+			"points": "16"
+		},
+		{
+			"goals_against": "49",
+			"goal_difference": "-17",
+			"lost": "9",
+			"won": "4",
+			"team": "East Wall Rovers",
+			"drawn": "3",
+			"played": "16",
+			"goals_for": "32",
+			"points": "15"
+		},
+		{
+			"goals_against": "47",
+			"goal_difference": "-26",
+			"lost": "11",
+			"won": "3",
+			"team": "Castleknock Celtic",
+			"drawn": "1",
+			"played": "15",
+			"goals_for": "21",
+			"points": "10"
+		},
+		{
+			"goals_against": "58",
+			"goal_difference": "-47",
+			"lost": "14",
+			"won": "1",
+			"team": "Carndonagh AFC",
+			"drawn": "0",
+			"played": "15",
+			"goals_for": "11",
+			"points": "3"
+		}*/
+	],
+	"cookies":[
+		"ASP.NET_SessionId=\"nz3d50opdnjekbmfj5feve2w\";Path=\"/\";Domain=\"aul.comortais.com\";Port=\"80\"","__AntiXsrfToken=\"9557d4c410bb4f86ba31facfcb105d0a\";Path=\"/\";Domain=\"aul.comortais.com\";Port=\"80\""
+	],
+
+	"connectorVersionGuid":"ea1d099b-9a71-4ff0-814c-bb0541e7270e",
+	"connectorGuid":"a1bfaa9f-6143-499a-a00f-d559e10c5de1",
+	"pageUrl":"http://aul.comortais.com/competition.aspx?id=1060"}

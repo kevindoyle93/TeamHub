@@ -4,7 +4,8 @@
     tools:context=".MainActivity"
     android:touchscreenBlocksFocus="false"
     android:background="@color/background_dark"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:gravity="center_horizontal">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -25,12 +26,13 @@
                 android:id="@+id/TopMenu"
                 android:layout_marginBottom="20dp">
 
-                <TextView android:text="@string/team_name" android:layout_width="fill_parent"
+                <TextView
+                    android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:textColor="@android:color/white"
                     android:id="@+id/teamName"
                     android:gravity="center"
-                    android:layout_weight="1"
+                    android:layout_weight="0"
                     android:textSize="@dimen/abc_text_size_large_material" />
 
                 <ImageView
@@ -100,11 +102,11 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="@string/away_team"
                             android:id="@+id/awayTeam"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@android:color/white" />
+                            android:textColor="@android:color/white"
+                            android:text="Howth Celtic" />
                     </LinearLayout>
 
                     <TextView
