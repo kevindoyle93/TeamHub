@@ -46,7 +46,7 @@ public class MyActivity extends ActionBarActivity
     /* Gonna try to create a separate class,
      * pass this activity, then pick the team.
      */
-    DataFetcher dataFetcher = new DataFetcher(this);
+    //DataFetcher dataFetcher = new DataFetcher(this);
 
 
     @Override

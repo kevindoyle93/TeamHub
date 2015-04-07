@@ -18,7 +18,7 @@ import org.jsoup.Jsoup;
 public class DataFetcher extends AsyncTask<String, Void, String> {
 
     public String awayTeam = "Howth Celtic";
-    public Activity myActivity;
+    public MainActivity myActivity;
 
     private String json;
 
@@ -57,7 +57,22 @@ public class DataFetcher extends AsyncTask<String, Void, String> {
 
         json = jsonWhole;
 
-        setAwayTeam();
+        JSONParser parser = new JSONParser();
+
+        try {
+            Object obj = parser.parse(json);
+            JSONArray array = (JSONArray)obj;
+
+            JSONObject team1 = (JSONObject)array.get(0);
+
+            // Try to set the MainActivity JSONObject
+            myActivity.setJson(team1);
+
+        } catch(ParseException pe) {
+
+            System.out.println("position: " + pe.getPosition());
+            System.out.println(pe);
+        }
 
         // TODO: Do all assigning/creating of teams, fixtures, etc.
     }
@@ -68,9 +83,6 @@ public class DataFetcher extends AsyncTask<String, Void, String> {
 
         final TextView textViewToChange;
         textViewToChange = (TextView)myActivity.findViewById(R.id.awayTeam);
-
-        // DEBUG MESSAGE
-        Log.d("First char of json is: ", String.valueOf(json.charAt(0)));
 
         try {
             Object obj = parser.parse(json);

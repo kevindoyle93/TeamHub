@@ -24,7 +24,6 @@ public class MainActivity extends ActionBarActivity {
 
     private JSONObject teamJson;
 
-    // Can I call this method from the dataFetcher?
     public void setJson(JSONObject team) {
 
         teamJson = team;
@@ -33,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     private Team team;
+    private LeagueStats stats;
 
     private void makeTeam() {
 
@@ -41,9 +41,18 @@ public class MainActivity extends ActionBarActivity {
         String teamHomePitch = "Edenmore Crescent";
         String teamManager = "Ciarán O'Driscoll";
 
-        team = new Team(teamName, teamAgeGroup, teamHomePitch, teamManager);
+        stats = new LeagueStats((String)teamJson.get("played"),
+                                (String)teamJson.get("won"),
+                                (String)teamJson.get("drawn"),
+                                (String)teamJson.get("lost"),
+                                (String)teamJson.get("goals_for"),
+                                (String)teamJson.get("goals_against"),
+                                (String)teamJson.get("goal_difference"),
+                                (String)teamJson.get("points"));
 
-        // team.setViews(this);
+        team = new Team(teamName, teamAgeGroup, teamHomePitch, teamManager, stats);
+
+        team.setViews(this);
     }
 
 

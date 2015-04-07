@@ -74,16 +74,15 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/Teams"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="@string/home_team"
                             android:id="@+id/homeTeam"
                             android:textColor="@android:color/white"
                             android:gravity="center"
@@ -100,13 +99,13 @@
 
                         <TextView
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:id="@+id/awayTeam"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:textColor="@android:color/white"
-                            android:text="Howth Celtic" />
+                            android:textColor="@android:color/white" />
+
                     </LinearLayout>
 
                     <TextView
@@ -212,7 +211,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/played_1"
                                 android:id="@+id/played0"
                                 android:textSize="16sp"
                                 android:textColor="#ffffff"
@@ -222,7 +220,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/points_1"
                                 android:id="@+id/points0"
                                 android:layout_margin="5dp"
                                 android:textSize="16sp"

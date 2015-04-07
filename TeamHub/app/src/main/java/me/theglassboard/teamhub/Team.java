@@ -23,12 +23,14 @@ public class Team {
 
     }
 
-    public Team(String name, String ageGroup, String homePitch, String manager) {
+    public Team(String name, String ageGroup, String homePitch, String manager, LeagueStats leagueStats) {
 
         this.name = name;
         this.ageGroup = ageGroup;
         this.homePitch = homePitch;
         this.manager = manager;
+
+        this.leagueStats = leagueStats;
     }
 
 
@@ -66,6 +68,8 @@ public class Team {
 
         textViewToChange = (TextView)myActivity.findViewById(R.id.homeTeam);
         textViewToChange.setText(name);
+
+        leagueStats.setViews(myActivity);
 
     }
 
