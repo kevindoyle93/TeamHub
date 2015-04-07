@@ -8,7 +8,7 @@ import android.widget.TextView;
  */
 public class Team {
 
-    private String name;
+    private String club;
     private String ageGroup;
     private String homePitch;
     private String manager;
@@ -23,9 +23,9 @@ public class Team {
 
     }
 
-    public Team(String name, String ageGroup, String homePitch, String manager, LeagueStats leagueStats) {
+    public Team(String club, String ageGroup, String homePitch, String manager, LeagueStats leagueStats) {
 
-        this.name = name;
+        this.club = club;
         this.ageGroup = ageGroup;
         this.homePitch = homePitch;
         this.manager = manager;
@@ -35,9 +35,9 @@ public class Team {
 
 
     // Public getters
-    public String getName() {
+    public String getClub() {
 
-        return name;
+        return club;
     }
 
     public String getAgeGroup() {
@@ -64,10 +64,10 @@ public class Team {
         TextView textViewToChange;
 
         textViewToChange = (TextView)myActivity.findViewById(R.id.teamName);
-        textViewToChange.setText(name.toUpperCase());
+        textViewToChange.setText(club.toUpperCase());
 
         textViewToChange = (TextView)myActivity.findViewById(R.id.homeTeam);
-        textViewToChange.setText(name);
+        textViewToChange.setText(club);
 
         leagueStats.setViews(myActivity);
 

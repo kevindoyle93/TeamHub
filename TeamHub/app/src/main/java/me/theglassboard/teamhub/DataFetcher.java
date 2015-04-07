@@ -42,10 +42,13 @@ public class DataFetcher extends AsyncTask<String, Void, String> {
 
             jsonWhole = jsonWhole.substring(jsonStart, jsonEnd);
 
+            Log.d("JSON: ", jsonWhole);
+
             return jsonWhole;
 
         } catch (IOException e) {
             // e.printStackTrace();
+            Log.d("EXCEPTION: ", "Getting JSON didn't work.");
 
             return null;
         }

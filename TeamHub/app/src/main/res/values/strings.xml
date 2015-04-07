@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">TeamHub</string>
 
-
     // These are placeholders, they would normally be taken from a database/JSON
     // Title menu
     <string name="menu_content_description">Menu</string>
@@ -9,7 +8,7 @@
     <string name="crest_content_description">Crest</string>
 
     // Next fixture
-    <string name="next_fixture">Next Fixture</string>
+    <string name="next_fixture">Results and Fixtures</string>
     <string name="home_team">Grange Woodbine F.C.</string>
     <string name="versus">V</string>
     <string name="away_team">Howth Celtic F.C.</string>
