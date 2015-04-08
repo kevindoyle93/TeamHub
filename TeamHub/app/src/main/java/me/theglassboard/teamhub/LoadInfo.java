@@ -20,7 +20,11 @@ public class LoadInfo extends ActionBarActivity {
 
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(LoadInfo.this, MainActivity.class));
+
+                Intent mainScreen = new Intent(LoadInfo.this, MainActivity.class);
+                mainScreen.putExtra("teamToGet", 0);
+
+                startActivity(mainScreen);
             }
         });
     }

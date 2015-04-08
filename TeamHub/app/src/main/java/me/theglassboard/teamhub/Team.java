@@ -1,7 +1,10 @@
 package me.theglassboard.teamhub;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Kevin on 06/04/2015.
@@ -13,7 +16,7 @@ public class Team {
     private String homePitch;
     private String manager;
 
-    private Fixture nextFixture;
+    private ArrayList<Fixture> fixtures;
     private LeagueStats leagueStats;
 
     // Training
@@ -31,28 +34,26 @@ public class Team {
         this.manager = manager;
 
         this.leagueStats = leagueStats;
+
+        fixtures = new ArrayList<>();
     }
 
 
     // Public getters
-    public String getClub() {
+    public String getClub() { return club; }
 
-        return club;
-    }
+    public String getAgeGroup() { return ageGroup; }
 
-    public String getAgeGroup() {
+    public String getHomePitch() { return homePitch; }
 
-        return ageGroup;
-    }
+    public String getManager() { return manager; }
 
-    public String getHomePitch() {
+    public LeagueStats getLeagueStats() { return leagueStats; }
 
-        return homePitch;
-    }
 
-    public String getManager() {
+    public void addToFixtures(Fixture f) {
 
-        return manager;
+        fixtures.add(f);
     }
 
 
@@ -66,13 +67,18 @@ public class Team {
         textViewToChange = (TextView)myActivity.findViewById(R.id.teamName);
         textViewToChange.setText(club.toUpperCase());
 
-        textViewToChange = (TextView)myActivity.findViewById(R.id.homeTeam);
-        textViewToChange.setText(club);
+        leagueStats.setViews(myActivity, club);
 
-        leagueStats.setViews(myActivity);
+        if(fixtures.size() > 0) {
 
+            int fixtureCount = 0;
+
+            while(fixtureCount < fixtures.size() && fixtures.get(fixtureCount).getHomeScore() != null) {
+
+                fixtureCount++;
+            }
+
+            fixtures.get(fixtureCount).setViews(myActivity);
+        }
     }
-
-
-
 }

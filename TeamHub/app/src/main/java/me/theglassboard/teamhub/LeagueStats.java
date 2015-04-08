@@ -24,18 +24,19 @@ public class LeagueStats {
         this.stats = stats;
     }
 
-    public LeagueStats(String played, String won, String drawn, String lost, String goalsFor, String goalsAgainst, String goalDifference, String points) {
+    public LeagueStats(String position, String played, String won, String drawn, String lost, String goalsFor, String goalsAgainst, String goalDifference, String points) {
 
-        stats = new String[8];
+        stats = new String[9];
 
-        stats[0] = played;
-        stats[1] = won;
-        stats[2] = drawn;
-        stats[3] = lost;
-        stats[4] = goalsFor;
-        stats[5] = goalsAgainst;
-        stats[6] = goalDifference;
-        stats[7] = points;
+        stats[0] = position;
+        stats[1] = played;
+        stats[2] = won;
+        stats[3] = drawn;
+        stats[4] = lost;
+        stats[5] = goalsFor;
+        stats[6] = goalsAgainst;
+        stats[7] = goalDifference;
+        stats[8] = points;
     }
 
     public String getStat(int i) {
@@ -45,16 +46,23 @@ public class LeagueStats {
 
 
     // Set the textViews for the league table section of home.xml
-    public void setViews(Activity myActivity) {
+    public void setViews(Activity myActivity, String club) {
 
+        final TextView positionTextView;
+        final TextView clubTextView;
         final TextView pointsTextView;
         final TextView playedTextView;
 
-        pointsTextView = (TextView)myActivity.findViewById(R.id.points0);
-        pointsTextView.setText(stats[7]);
+        positionTextView = (TextView) myActivity.findViewById(R.id.position0);
+        positionTextView.setText(stats[0] + ".");
 
-        playedTextView= (TextView)myActivity.findViewById(R.id.played0);
-        playedTextView.setText(stats[0]);
+        pointsTextView = (TextView) myActivity.findViewById(R.id.points0);
+        pointsTextView.setText(stats[8]);
 
+        playedTextView = (TextView) myActivity.findViewById(R.id.played0);
+        playedTextView.setText(stats[1]);
+
+        clubTextView = (TextView) myActivity.findViewById(R.id.team0);
+        clubTextView.setText(club);
     }
 }
