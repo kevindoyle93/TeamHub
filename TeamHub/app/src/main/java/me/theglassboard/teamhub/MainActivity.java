@@ -3,9 +3,9 @@ package me.theglassboard.teamhub;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import org.json.simple.JSONObject;
 
 
@@ -16,17 +16,22 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // String leagueTableURL = "https://api.import.io/store/data/a1bfaa9f-6143-499a-a00f-d559e10c5de1/_query?input/webpage/url=http%3A%2F%2Faul.comortais.com%2Fcompetition.aspx%3Fid%3D1060&_user=f263fc1d-792b-4302-a562-a993a22d1c65&_apikey=kMgmJWavxVUJZsXcD4uLxN7rBlgy5%2BeFllVwXUa3RIit6tSAEH2CwxWxc4C%2BtlMF%2B9ait%2BgnNz9dAqoI%2BKDKEw%3D%3D";
-        // String fixturesURL = "https://api.import.io/store/data/1eacba70-90fe-4225-8c11-ea3cc2c27112/_query?input/webpage/url=http%3A%2F%2Faul.comortais.com%2Ffixtures.aspx%3FteamID%3D2111%26compId%3D1060&_user=f263fc1d-792b-4302-a562-a993a22d1c65&_apikey=kMgmJWavxVUJZsXcD4uLxN7rBlgy5%2BeFllVwXUa3RIit6tSAEH2CwxWxc4C%2BtlMF%2B9ait%2BgnNz9dAqoI%2BKDKEw%3D%3D";
-
-        Intent thisIntent = getIntent();
-        teamPosition = thisIntent.getIntExtra("teamToGet", 0);
-
-        dataFetcher = new DataFetcher(this);
-        dataFetcher.execute();
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+
+        if(savedInstanceState != null) {
+
+            Log.d("SAVED INSTANCE STATE", "NOT NULL");
+        }
+        else {
+
+            Intent thisIntent = getIntent();
+            teamPosition = thisIntent.getIntExtra("teamToGet", 0);
+
+            dataFetcher = new DataFetcher(this);
+            dataFetcher.execute();
+
+            setContentView(R.layout.home);
+        }
     }
 
 
@@ -56,8 +61,8 @@ public class MainActivity extends ActionBarActivity {
         thirdLeagueTeamPosition = (teamPosition > 0) ? teamPosition + 1 : teamPosition + 2;
 
         teamJson = dataFetcher.getTeamInfo(teamPosition);
-        JSONObject secondTeamJson = dataFetcher.getTeamInfo(secondLeagueTeamPosition);
-        JSONObject thirdTeamJson = dataFetcher.getTeamInfo(thirdLeagueTeamPosition);
+        // JSONObject secondTeamJson = dataFetcher.getTeamInfo(secondLeagueTeamPosition);
+        // JSONObject thirdTeamJson = dataFetcher.getTeamInfo(thirdLeagueTeamPosition);
 
         String teamName = (String)(teamJson.get("team"));
         String teamAgeGroup = "Senior";
@@ -154,6 +159,25 @@ public class MainActivity extends ActionBarActivity {
             startActivity(new Intent(this, LoadInfo.class));
         }
 
+        if(id == R.id.refresh_settings) {
+
+            Log.d("Next team", "" + (teamPosition + 1) % dataFetcher.getNumberOfTeams());
+            teamPosition = (teamPosition + 1) % dataFetcher.getNumberOfTeams();
+
+            dataFetcher = new DataFetcher(this);
+            dataFetcher.execute();
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        // savedInstanceState.putDataFetche;
+        // savedInstanceState.putInt(STATE_LEVEL, mCurrentLevel);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
     }
 }

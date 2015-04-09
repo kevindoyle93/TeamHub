@@ -107,6 +107,8 @@ public class DataFetcher extends AsyncTask<String, Void, Void> {
         return teamObjects.get(i);
     }
 
+    public int getNumberOfTeams() { return teamObjects.size(); }
+
     public JSONObject getFixtureInfo(int i) {
 
         return fixtureObjects.get(i);

@@ -73,7 +73,7 @@ public class Team {
 
             int fixtureCount = 0;
 
-            while(fixtureCount < fixtures.size() && fixtures.get(fixtureCount).getHomeScore() != null) {
+            while(fixtureCount < fixtures.size() - 1 && fixtures.get(fixtureCount).getHomeScore() != null) {
 
                 fixtureCount++;
             }
