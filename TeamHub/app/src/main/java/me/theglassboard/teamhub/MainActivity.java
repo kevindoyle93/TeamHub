@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity {
-
-    DataFetcher dataFetcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,118 +28,90 @@ public class MainActivity extends ActionBarActivity {
         }
         else {
 
-            Intent thisIntent = getIntent();
-            teamPosition = thisIntent.getIntExtra("teamToGet", 0);
+            Log.d("SAVED INSTANCE STATE", "NULL");
 
-            dataFetcher = new DataFetcher(this);
-            dataFetcher.execute();
+            JSONParser parser = new JSONParser();
 
-            setContentView(R.layout.home);
-        }
-    }
+            try {
 
+                Object obj = parser.parse(getIntent().getStringExtra("teamJSON"));
+                teamsJson = (JSONArray)obj;
 
-    private JSONObject teamJson;
+                obj = parser.parse(getIntent().getStringExtra("fixturesJSON"));
+                fixturesJson = (JSONArray)obj;
 
-    public void setJson(JSONObject team) {
+                currentTeamPosition = getIntent().getIntExtra("teamPosition", 0);
+            }
+            catch(ParseException pe) {
 
-        teamJson = team;
-        makeTeam();
-    }
-
-
-    private Team team;
-    private int teamPosition;
-
-    public void makeTeam() {
-
-        LeagueStats stats;
-
-        // This would change depending on the team selected by the user
-        // teamPosition = 6;
-
-        int secondLeagueTeamPosition;
-        int thirdLeagueTeamPosition;
-
-        secondLeagueTeamPosition = (teamPosition > 0) ? teamPosition - 1 : teamPosition + 1;
-        thirdLeagueTeamPosition = (teamPosition > 0) ? teamPosition + 1 : teamPosition + 2;
-
-        teamJson = dataFetcher.getTeamInfo(teamPosition);
-        // JSONObject secondTeamJson = dataFetcher.getTeamInfo(secondLeagueTeamPosition);
-        // JSONObject thirdTeamJson = dataFetcher.getTeamInfo(thirdLeagueTeamPosition);
-
-        String teamName = (String)(teamJson.get("team"));
-        String teamAgeGroup = "Senior";
-        String teamHomePitch = "Edenmore Crescent";
-        String teamManager = "Ciarán O'Driscoll";
-
-        stats = new LeagueStats(String.valueOf(teamPosition + 1),
-                                (String)teamJson.get("played"),
-                                (String)teamJson.get("won"),
-                                (String)teamJson.get("drawn"),
-                                (String)teamJson.get("lost"),
-                                (String)teamJson.get("goals_for"),
-                                (String)teamJson.get("goals_against"),
-                                (String)teamJson.get("goal_difference"),
-                                (String)teamJson.get("points"));
-
-        team = new Team(teamName, teamAgeGroup, teamHomePitch, teamManager, stats);
-
-        /*stats = new LeagueStats(String.valueOf(teamPosition + 1),
-                (String)secondTeamJson.get("played"),
-                (String)secondTeamJson.get("won"),
-                (String)secondTeamJson.get("drawn"),
-                (String)secondTeamJson.get("lost"),
-                (String)secondTeamJson.get("goals_for"),
-                (String)secondTeamJson.get("goals_against"),
-                (String)secondTeamJson.get("goal_difference"),
-                (String)secondTeamJson.get("points"));
-
-        teamName = (String)secondTeamJson.get("team");
-        teamAgeGroup = null;
-        teamHomePitch = null;
-        teamManager = null;
-
-        Team secondTeam = new Team(teamName, teamAgeGroup, teamHomePitch, teamManager, stats);
-
-        stats = new LeagueStats(String.valueOf(teamPosition + 1),
-                (String)thirdTeamJson.get("played"),
-                (String)thirdTeamJson.get("won"),
-                (String)thirdTeamJson.get("drawn"),
-                (String)thirdTeamJson.get("lost"),
-                (String)thirdTeamJson.get("goals_for"),
-                (String)thirdTeamJson.get("goals_against"),
-                (String)thirdTeamJson.get("goal_difference"),
-                (String)thirdTeamJson.get("points"));
-
-        teamName = (String)thirdTeamJson.get("team");
-        teamAgeGroup = null;
-        teamHomePitch = null;
-        teamManager = null;
-
-        Team thirdTeam = new Team(teamName, teamAgeGroup, teamHomePitch, teamManager, stats);*/
-
-
-        for(int i = 0; i < dataFetcher.getFixtureInfoSize(); i++) {
-
-            JSONObject fixturesJson = dataFetcher.getFixtureInfo(i);
-
-            Fixture f = new Fixture((String)fixturesJson.get("home_team"),
-                                    (String)fixturesJson.get("away_team"),
-                                    (String)fixturesJson.get("home_score"),
-                                    (String)fixturesJson.get("away_score"),
-                                    (String)fixturesJson.get("pitch/_text"),
-                                    (String)fixturesJson.get("date_and_time"),
-                                    (String)fixturesJson.get("referee")
-                    );
-
-            if(f.getTime() != null && (f.getHomeTeam().equalsIgnoreCase(team.getClub()) || f.getAwayTeam().equalsIgnoreCase(team.getClub()))) {
-
-                team.addToFixtures(f);
+                System.out.println("position: " + pe.getPosition());
+                System.out.println(pe);
             }
         }
 
-        team.setViews(this);
+        setContentView(R.layout.home);
+        makeTeams();
+    }
+
+
+    private JSONArray teamsJson;
+    private JSONArray fixturesJson;
+
+    private int currentTeamPosition;
+    private JSONObject currentTeam;
+
+    private ArrayList<Team> teams;
+
+    public void makeTeams() {
+
+        teams = new ArrayList<>();
+
+
+        for(int i = 0; i < teamsJson.size(); i++) {
+
+            LeagueStats stats;
+
+            currentTeam = (JSONObject)teamsJson.get(i);
+
+            String teamName = (String) (currentTeam.get("team"));
+            String teamAgeGroup = "";
+            String teamHomePitch = "";
+            String teamManager = "";
+
+            stats = new LeagueStats(String.valueOf(i + 1),
+                                    (String) currentTeam.get("played"),
+                                    (String) currentTeam.get("won"),
+                                    (String) currentTeam.get("drawn"),
+                                    (String) currentTeam.get("lost"),
+                                    (String) currentTeam.get("goals_for"),
+                                    (String) currentTeam.get("goals_against"),
+                                    (String) currentTeam.get("goal_difference"),
+                                    (String) currentTeam.get("points"));
+
+            teams.add(new Team(teamName, teamAgeGroup, teamHomePitch, teamManager, stats));
+        }
+
+
+        for(int i = 0; i < fixturesJson.size(); i++) {
+
+            JSONObject fixture = (JSONObject)fixturesJson.get(i);
+
+            Fixture f = new Fixture((String)fixture.get("home_team"),
+                                    (String)fixture.get("away_team"),
+                                    (String)fixture.get("home_score"),
+                                    (String)fixture.get("away_score"),
+                                    (String)fixture.get("pitch/_text"),
+                                    (String)fixture.get("date_and_time"),
+                                    (String)fixture.get("referee")
+                    );
+
+            if(f.getTime() != null && (f.getHomeTeam().equalsIgnoreCase(teams.get(currentTeamPosition).getClub()) || f.getAwayTeam().equalsIgnoreCase(teams.get(currentTeamPosition).getClub()))) {
+
+                teams.get(currentTeamPosition).addToFixtures(f);
+            }
+        }
+
+        teams.get(currentTeamPosition).setViews(this);
     }
 
 
@@ -161,11 +137,11 @@ public class MainActivity extends ActionBarActivity {
 
         if(id == R.id.refresh_settings) {
 
-            Log.d("Next team", "" + (teamPosition + 1) % dataFetcher.getNumberOfTeams());
+            /*Log.d("Next team", "" + (teamPosition + 1) % dataFetcher.getNumberOfTeams());
             teamPosition = (teamPosition + 1) % dataFetcher.getNumberOfTeams();
 
             dataFetcher = new DataFetcher(this);
-            dataFetcher.execute();
+            dataFetcher.execute();*/
         }
 
         return super.onOptionsItemSelected(item);

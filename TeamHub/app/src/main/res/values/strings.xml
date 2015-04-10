@@ -7,30 +7,29 @@
     <string name="team_name">Grange Woodbine F.C.</string>
     <string name="crest_content_description">Crest</string>
 
+    // Divisions available in the drop down
+    <string-array name="divisions_array">
+        <item>Premier A</item>
+        <item>Premier B</item>
+        <item>Premier C</item>
+        <item>Senior Saturday</item>
+        <item>Division 1 Saturday</item>
+        <item>Division 1A Saturday</item>
+        <item>Division 2 Saturday</item>
+        <item>Division 2A Saturday</item>
+        <item>Division 3 Saturday</item>
+        <item>Division 3A Saturday</item>
+        <item>Division 1 Sunday</item>
+        <item>Division 3 Sunday</item>
+    </string-array>
+
     // Next fixture
     <string name="next_fixture">Results and Fixtures</string>
-    <string name="home_team">Grange Woodbine F.C.</string>
-    <string name="versus">V</string>
-    <string name="away_team">Howth Celtic F.C.</string>
-    <string name="location_and_time">Edenmore Crescent, 2.00pm</string>
 
     // League table
     <string name="league_table">League Table</string>
-    <string name="team">Team</string>
     <string name="played">Played</string>
     <string name="points">Points</string>
-    <string name="position_1">1.</string>
-    <string name="position_2">2.</string>
-    <string name="position_3">3.</string>
-    <string name="position_1_team">Grange Woodbine</string>
-    <string name="position_2_team">Howth Celtic</string>
-    <string name="position_3_team">Mourne Celtic</string>
-    <string name="played_1">16</string>
-    <string name="played_2">12</string>
-    <string name="played_3">18</string>
-    <string name="points_1">39</string>
-    <string name="points_2">31</string>
-    <string name="points_3">31</string>
 
     // Training
     <string name="training">Training</string>

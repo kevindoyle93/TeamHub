@@ -28,4 +28,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('libs/json-simple-1.1.1.jar')
     compile files('libs/org.jsoup_1.7.2.v201304221138.jar')
+    compile files('libs/sqlite-jdbc-3.8.7.jar')
 }
