@@ -7,29 +7,13 @@
     <string name="team_name">Grange Woodbine F.C.</string>
     <string name="crest_content_description">Crest</string>
 
-    // Divisions available in the drop down
-    <string-array name="divisions_array">
-        <item>Premier A</item>
-        <item>Premier B</item>
-        <item>Premier C</item>
-        <item>Senior Saturday</item>
-        <item>Division 1 Saturday</item>
-        <item>Division 1A Saturday</item>
-        <item>Division 2 Saturday</item>
-        <item>Division 2A Saturday</item>
-        <item>Division 3 Saturday</item>
-        <item>Division 3A Saturday</item>
-        <item>Division 1 Sunday</item>
-        <item>Division 3 Sunday</item>
-    </string-array>
-
     // Next fixture
     <string name="next_fixture">Results and Fixtures</string>
 
     // League table
     <string name="league_table">League Table</string>
-    <string name="played">Played</string>
-    <string name="points">Points</string>
+    <string name="played">Pl</string>
+    <string name="points">Pts</string>
 
     // Training
     <string name="training">Training</string>

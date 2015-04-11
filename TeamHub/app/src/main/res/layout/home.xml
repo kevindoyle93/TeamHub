@@ -145,10 +145,11 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/LeagueTableContainer">
 
                     <TextView
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="@string/league_table"
@@ -157,28 +158,31 @@
                         android:textColor="#ffffff" />
 
                     <TableLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Table"
+                        android:stretchColumns="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
 
                         <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:id="@+id/stats"
-                            android:gravity="center">
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/LeagueTableHeadings">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:text="Pos"
-                                android:id="@+id/textView3"
-                                android:textColor="@android:color/white" />
+                                android:id="@+id/positionColumn"
+                                android:textColor="@android:color/white"
+                                android:singleLine="false"
+                                android:layout_margin="5dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/teamColumn"
-                                android:layout_column="1"
                                 android:textColor="#ffffff"
                                 android:layout_margin="5dp" />
 
@@ -188,8 +192,8 @@
                                 android:text="@string/played"
                                 android:id="@+id/playedColumn"
                                 android:textColor="#ffffff"
-                                android:layout_margin="5dp"
-                                android:gravity="center" />
+                                android:gravity="center"
+                                android:layout_margin="5dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -197,129 +201,14 @@
                                 android:text="@string/points"
                                 android:id="@+id/pointsColumn"
                                 android:textColor="#ffffff"
-                                android:layout_margin="5dp"
-                                android:layout_column="3"
-                                android:gravity="center" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/firstRow"
-                            android:gravity="center">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/position0"
-                                android:textColor="@android:color/white"
-                                android:layout_margin="5dp"
-                                android:gravity="center"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/team0"
-                                android:textColor="#ffffff"
-                                android:layout_margin="5dp"
-                                android:gravity="left"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/played0"
-                                android:textSize="16sp"
-                                android:textColor="#ffffff"
                                 android:gravity="center"
                                 android:layout_margin="5dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/points0"
-                                android:layout_margin="5dp"
-                                android:textSize="16sp"
-                                android:textColor="#ffffff"
-                                android:gravity="center" />
-
                         </TableRow>
-
                     </TableLayout>
+
                 </LinearLayout>
 
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/Training"
-                android:background="@color/background_light">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/training"
-                        android:id="@+id/training"
-                        android:gravity="center"
-                        android:textColor="#ffffff" />
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/training_location"
-                        android:id="@+id/trainingLocation"
-                        android:gravity="center"
-                        android:textColor="#ffffff"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/training_start_time"
-                            android:id="@+id/trainingStartTime"
-                            android:gravity="center|right"
-                            android:layout_weight="1"
-                            android:textColor="#ffffff" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text=" - "
-                            android:id="@+id/trainingTimeDivider"
-                            android:textColor="#ffffff"
-                            android:gravity="center" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/training_end_time"
-                            android:id="@+id/trainingEndTime"
-                            android:gravity="left|center"
-                            android:textColor="#ffffff"
-                            android:layout_weight="1" />
-                    </LinearLayout>
-                </LinearLayout>
             </FrameLayout>
 
         </LinearLayout>

@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -88,9 +93,8 @@ public class MainActivity extends ActionBarActivity {
                                     (String) currentTeam.get("goal_difference"),
                                     (String) currentTeam.get("points"));
 
-            teams.add(new Team(teamName, teamAgeGroup, teamHomePitch, teamManager, stats));
+            teams.add(new Team(teamName, /* teamAgeGroup, teamHomePitch, teamManager, */stats));
         }
-
 
         for(int i = 0; i < fixturesJson.size(); i++) {
 
@@ -101,7 +105,8 @@ public class MainActivity extends ActionBarActivity {
                                     (String)fixture.get("home_score"),
                                     (String)fixture.get("away_score"),
                                     (String)fixture.get("pitch/_text"),
-                                    (String)fixture.get("date_and_time"),
+                                    splitDateAndTime((String)fixture.get("date_and_time"), "date"),
+                                    splitDateAndTime((String)fixture.get("date_and_time"), "time"),
                                     (String)fixture.get("referee")
                     );
 
@@ -112,6 +117,71 @@ public class MainActivity extends ActionBarActivity {
         }
 
         teams.get(currentTeamPosition).setViews(this);
+
+        // TODO: make the league table
+        createLeagueTable();
+    }
+
+    private void createLeagueTable() {
+
+        final TableLayout leagueTable = (TableLayout)findViewById(R.id.Table);
+        int teamsToDisplay = 3;
+
+        // My edge cases are if the current team are first or last
+        if(currentTeamPosition == 0) {
+
+            for(int i = 0; i < teamsToDisplay; i++) {
+
+                TableRow row = teams.get(i).getLeagueStats().setViews(this, teams.get(i).getClub());
+                leagueTable.addView(row);
+            }
+        }
+        else if(currentTeamPosition == teams.size() - 1) {
+
+            for(int i = (currentTeamPosition - teamsToDisplay + 1); i < teams.size(); i++) {
+
+                TableRow row = teams.get(i).getLeagueStats().setViews(this, teams.get(i).getClub());
+                leagueTable.addView(row);
+            }
+        }
+        else {
+
+            for(int i = currentTeamPosition - 1; i < (currentTeamPosition - 1 + teamsToDisplay); i++) {
+
+                TableRow row = teams.get(i).getLeagueStats().setViews(this, teams.get(i).getClub());
+                leagueTable.addView(row);
+            }
+        }
+    }
+
+    private String splitDateAndTime(String whole, String split) {
+
+        String ret;
+        int lengthOfDate = 8;
+
+        if(whole == null)
+            return null;
+
+        if(split.equals("date")) {
+
+            Log.d("STRING TO PARSE IS", whole);
+
+            if(whole.length() == lengthOfDate)
+                return whole;
+
+            else
+                ret = whole.substring(0, whole.indexOf(' '));
+
+            return  ret;
+        }
+        else if(split.equals("time") && whole.length() > lengthOfDate) {
+
+            ret = whole.substring(whole.indexOf(' ') + 1);
+
+            return ret;
+        }
+        else
+            return null;
     }
 
 

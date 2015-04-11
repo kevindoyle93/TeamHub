@@ -12,26 +12,25 @@ import java.util.ArrayList;
 public class Team {
 
     private String club;
-    private String ageGroup;
+
+    /*private String ageGroup;
     private String homePitch;
-    private String manager;
+    private String manager;*/
 
     private ArrayList<Fixture> fixtures;
     private LeagueStats leagueStats;
-
-    // Training
-    // Crest
 
     public Team() {
 
     }
 
-    public Team(String club, String ageGroup, String homePitch, String manager, LeagueStats leagueStats) {
+    public Team(String club, /* String ageGroup, String homePitch, String manager, */LeagueStats leagueStats) {
 
         this.club = club;
-        this.ageGroup = ageGroup;
+
+        /*this.ageGroup = ageGroup;
         this.homePitch = homePitch;
-        this.manager = manager;
+        this.manager = manager;*/
 
         this.leagueStats = leagueStats;
 
@@ -42,11 +41,11 @@ public class Team {
     // Public getters
     public String getClub() { return club; }
 
-    public String getAgeGroup() { return ageGroup; }
+    /*public String getAgeGroup() { return ageGroup; }
 
     public String getHomePitch() { return homePitch; }
 
-    public String getManager() { return manager; }
+    public String getManager() { return manager; }*/
 
     public LeagueStats getLeagueStats() { return leagueStats; }
 
@@ -67,7 +66,7 @@ public class Team {
         textViewToChange = (TextView)myActivity.findViewById(R.id.teamName);
         textViewToChange.setText(club.toUpperCase());
 
-        leagueStats.setViews(myActivity, club);
+        // leagueStats.setViews(myActivity, club);
 
         if(fixtures.size() > 0) {
 

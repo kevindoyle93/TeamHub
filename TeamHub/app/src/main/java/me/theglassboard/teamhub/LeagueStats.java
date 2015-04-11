@@ -1,6 +1,11 @@
 package me.theglassboard.teamhub;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.widget.AbsoluteLayout;
+import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 /**
@@ -46,23 +51,55 @@ public class LeagueStats {
 
 
     // Set the textViews for the league table section of home.xml
-    public void setViews(Activity myActivity, String club) {
+    public TableRow setViews(Activity myActivity, String club) {
+
+        TableRow.LayoutParams rowParams = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+
+        TableRow.LayoutParams statsParams = new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        statsParams.setMargins(5, 5, 5, 5);
+
+        // TODO: Create the table cells for the stats. Make an if(myActivity instanceof LeagueTable) to return more information
+        TableRow row = new TableRow(myActivity);
+        row.setLayoutParams(rowParams);
 
         final TextView positionTextView;
         final TextView clubTextView;
         final TextView pointsTextView;
         final TextView playedTextView;
 
-        positionTextView = (TextView) myActivity.findViewById(R.id.position0);
+        positionTextView = new TextView(myActivity);
         positionTextView.setText(stats[0] + ".");
+        positionTextView.setLayoutParams(statsParams);
+        positionTextView.setTextColor(Color.WHITE);
+        positionTextView.setGravity(Gravity.CENTER);
 
-        pointsTextView = (TextView) myActivity.findViewById(R.id.points0);
-        pointsTextView.setText(stats[8]);
+        positionTextView.setPadding(10, 0, 0, 0);
+        row.addView(positionTextView);
 
-        playedTextView = (TextView) myActivity.findViewById(R.id.played0);
-        playedTextView.setText(stats[1]);
-
-        clubTextView = (TextView) myActivity.findViewById(R.id.team0);
+        clubTextView = new TextView(myActivity);
         clubTextView.setText(club);
+        clubTextView.setLayoutParams(statsParams);
+        clubTextView.setTextColor(Color.WHITE);
+        clubTextView.setGravity(Gravity.LEFT);
+        row.addView(clubTextView);
+
+        playedTextView = new TextView(myActivity);
+        playedTextView.setText(stats[1]);
+        playedTextView.setLayoutParams(statsParams);
+        playedTextView.setTextColor(Color.WHITE);
+        playedTextView.setGravity(Gravity.CENTER);
+        row.addView(playedTextView);
+
+        pointsTextView = new TextView(myActivity);
+        pointsTextView.setText(stats[8]);
+        pointsTextView.setLayoutParams(statsParams);
+        pointsTextView.setTextColor(Color.WHITE);
+        pointsTextView.setGravity(Gravity.CENTER);
+        pointsTextView.setPadding(0, 0, 0, 10);
+        row.addView(pointsTextView);
+
+        return row;
     }
 }

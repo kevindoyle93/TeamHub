@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.text.format.DateFormat;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 /**
  * Created by Kevin on 06/04/2015.
  */
@@ -15,23 +18,27 @@ public class Fixture {
     private String awayScore;
     private String location;
     private String time;
+    private String date;
     private String referee;
 
-    // private DateFormat date;
+    // private SimpleDateFormat date;
 
     public Fixture() {
 
     }
 
-    public Fixture(String homeTeam, String awayTeam, String homeScore, String awayScore, String location, String time, String referee) {
+    public Fixture(String homeTeam, String awayTeam, String homeScore, String awayScore, String location, String date, String time, String referee) {
 
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = homeScore;
         this.awayScore = awayScore;
         this.location = location;
+        this.date = date;
         this.time = time;
         this.referee = referee;
+
+        // date = new SimpleDateFormat("EEE, d/MMM", Locale.UK);
     }
 
 
@@ -66,7 +73,6 @@ public class Fixture {
         TextView textViewToChange = (TextView) myActivity.findViewById(R.id.homeTeam);
         textViewToChange.setText(homeTeam);
 
-        // TODO: Add the home and away scores to home.xml
         if (homeScore != null) {
 
             textViewToChange = (TextView) myActivity.findViewById(R.id.homeScore);
@@ -83,7 +89,7 @@ public class Fixture {
         textViewToChange.setText(awayTeam);
 
         textViewToChange = (TextView)myActivity.findViewById(R.id.locationAndTime);
-        textViewToChange.setText(location + ", " + time);
+        textViewToChange.setText(location + ", " + date + " " + time);
 
     }
 }
