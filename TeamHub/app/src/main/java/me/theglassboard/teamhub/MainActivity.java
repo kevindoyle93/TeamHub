@@ -1,5 +1,6 @@
 package me.theglassboard.teamhub;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -27,35 +28,50 @@ public class MainActivity extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
 
-        if(savedInstanceState != null) {
+        /**
+         *  Create an ObjectManager object to check if the user has already downloaded the information
+         */
+        String teamsFileName = "teamsJSONArray";
+        String fixturesFileName = "fixturesJSONArray";
+        String currentTeamFilename = "currentTeam";
+        ObjectManager jsonManager = new ObjectManager(this);
 
-            Log.d("SAVED INSTANCE STATE", "NOT NULL");
-        }
-        else {
+        if(jsonManager.fileExists(teamsFileName)) {
 
-            Log.d("SAVED INSTANCE STATE", "NULL");
+            Log.d("onCreate", "IN THE IF");
 
             JSONParser parser = new JSONParser();
 
+            Object obj;
             try {
 
-                Object obj = parser.parse(getIntent().getStringExtra("teamJSON"));
+                obj = jsonManager.readObject(teamsFileName);
+                obj = parser.parse((String) obj);
                 teamsJson = (JSONArray)obj;
+                Log.d("The teamsJson is", teamsJson.toString());
 
-                obj = parser.parse(getIntent().getStringExtra("fixturesJSON"));
+                obj = parser.parse((String)jsonManager.readObject(fixturesFileName));
                 fixturesJson = (JSONArray)obj;
 
-                currentTeamPosition = getIntent().getIntExtra("teamPosition", 0);
+                findCurrentTeam((String)jsonManager.readObject(currentTeamFilename));
             }
-            catch(ParseException pe) {
+            catch (ParseException e) {
 
-                System.out.println("position: " + pe.getPosition());
-                System.out.println(pe);
+                Log.d("Exception", "Couldn't load files", e);
             }
+
+            setContentView(R.layout.home);
+            makeTeams();
+        }
+        else {
+
+            Log.d("onCreate", "IN THE ELSE");
+
+            // Run the LoadInfoActivity
+            Intent loadInfo = new Intent(MainActivity.this, LoadInfo.class);
+            startActivity(loadInfo);
         }
 
-        setContentView(R.layout.home);
-        makeTeams();
     }
 
 
@@ -164,8 +180,6 @@ public class MainActivity extends ActionBarActivity {
 
         if(split.equals("date")) {
 
-            Log.d("STRING TO PARSE IS", whole);
-
             if(whole.length() == lengthOfDate)
                 return whole;
 
@@ -184,6 +198,19 @@ public class MainActivity extends ActionBarActivity {
             return null;
     }
 
+    private void findCurrentTeam(String searchKey) {
+
+        for(int i = 0; i < teamsJson.size(); i++) {
+
+            JSONObject object = (JSONObject)teamsJson.get(i);
+            if(object.get("team").equals(searchKey)) {
+
+                currentTeamPosition = i;
+
+                return;
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

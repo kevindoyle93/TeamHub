@@ -38,7 +38,7 @@ public class Fixture {
         this.time = time;
         this.referee = referee;
 
-        // date = new SimpleDateFormat("EEE, d/MMM", Locale.UK);
+        // date = new SimpleDateFormat("EEE, d/MMM");
     }
 
 

@@ -84,7 +84,7 @@ public class LoadInfo extends ActionBarActivity {
                 divisions[11].getName(),
                 divisions[12].getName()
         };
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         divisionDropdown.setAdapter(adapter2);
 
         divisionDropdown.setOnItemSelectedListener(
@@ -112,7 +112,7 @@ public class LoadInfo extends ActionBarActivity {
         final Spinner teamDropdown = (Spinner)findViewById(R.id.teamsDropdown);
         ArrayList<String> items2 = new ArrayList<>();
         items2.add("Choose your division first");
-        adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items2);
+        adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
         teamDropdown.setAdapter(adapter2);
 
         Button btn = (Button)findViewById(R.id.open_activity_button);
@@ -120,11 +120,9 @@ public class LoadInfo extends ActionBarActivity {
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                Intent mainScreen = new Intent(LoadInfo.this, MainActivity.class);
-                mainScreen.putExtra("teamJSON", teamsArray.toString());
-                mainScreen.putExtra("fixturesJSON", fixtures);
-                mainScreen.putExtra("teamPosition", teamChoice);
+                saveData();
 
+                Intent mainScreen = new Intent(LoadInfo.this, MainActivity.class);
                 startActivity(mainScreen);
             }
         });
@@ -135,6 +133,18 @@ public class LoadInfo extends ActionBarActivity {
         dataFetcher = new DataFetcher(this);
         dataFetcher.setCompetitionID(competitionID);
         dataFetcher.execute();
+    }
+
+    private void saveData() {
+
+        ObjectManager objectManager = new ObjectManager(LoadInfo.this);
+
+        String[] fileNames = {"teamsJSONArray", "fixturesJSONArray", "currentTeam"};
+        String currentTeam = (String)((JSONObject)teamsArray.get(teamChoice)).get("team");
+
+        objectManager.saveObject(teamsArray.toString(), fileNames[0]);
+        objectManager.saveObject(fixtures, fileNames[1]);
+        objectManager.saveObject(currentTeam, fileNames[2]);
     }
 
     public void setFixtures(String fixtures) { this.fixtures = fixtures; }
@@ -164,7 +174,7 @@ public class LoadInfo extends ActionBarActivity {
             items.add((String) team.get("team"));
         }
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         teamDropdown.setAdapter(adapter2);
 
         teamDropdown.setOnItemSelectedListener(

@@ -207,6 +207,16 @@
                         </TableRow>
                     </TableLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/see_full_table"
+                        android:id="@+id/seeFullTable"
+                        android:textColor="@android:color/white"
+                        android:layout_gravity="right"
+                        android:clickable="true"
+                        android:layout_margin="10dp" />
+
                 </LinearLayout>
 
             </FrameLayout>

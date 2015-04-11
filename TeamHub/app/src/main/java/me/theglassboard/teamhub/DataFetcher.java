@@ -90,7 +90,7 @@ public class DataFetcher extends AsyncTask<String, Void, Void> {
 
         } catch (IOException e) {
             // e.printStackTrace();
-            Log.d("EXCEPTION: ", "Getting JSON didn't work.");
+            Log.d("EXCEPTION: ", "Getting JSON didn't work.", e);
 
             return null;
         }
