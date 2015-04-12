@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -59,6 +61,7 @@ public class MainActivity extends ActionBarActivity {
 
             setContentView(R.layout.home);
             makeTeams();
+            setListeners();
         }
         else {
             // Run the LoadInfoActivity
@@ -204,6 +207,29 @@ public class MainActivity extends ActionBarActivity {
                 return;
             }
         }
+    }
+
+    private void setListeners() {
+
+        TextView fixturesButton = (TextView)findViewById(R.id.seeFullFixtures);
+
+        fixturesButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                Intent fixturesScreen = new Intent(MainActivity.this, FixtureList.class);
+                startActivity(fixturesScreen);
+            }
+        });
+
+        TextView leagueTablesButton = (TextView)findViewById(R.id.seeFullTable);
+
+        leagueTablesButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                Intent leagueTablesScreen = new Intent(MainActivity.this, FixtureList.class);
+                startActivity(leagueTablesScreen);
+            }
+        });
     }
 
     @Override

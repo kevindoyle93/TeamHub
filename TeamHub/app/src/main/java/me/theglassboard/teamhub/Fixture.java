@@ -95,6 +95,14 @@ public class Fixture {
 
             textViewToChange = (TextView) myActivity.findViewById(R.id.awayScore);
             textViewToChange.setText(awayScore);
+
+            textViewToChange = (TextView) myActivity.findViewById(R.id.resultsAndFixtures);
+            textViewToChange.setText("Latest Result");
+        }
+        else  {
+
+            textViewToChange = (TextView) myActivity.findViewById(R.id.resultsAndFixtures);
+            textViewToChange.setText("Next Fixture");
         }
 
         textViewToChange = (TextView) myActivity.findViewById((R.id.versus));

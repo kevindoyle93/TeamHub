@@ -122,7 +122,7 @@ public class LoadInfo extends ActionBarActivity {
 
                 saveData();
 
-                Intent mainScreen = new Intent(LoadInfo.this, Home.class);
+                Intent mainScreen = new Intent(LoadInfo.this, MainActivity.class);
                 startActivity(mainScreen);
             }
         });

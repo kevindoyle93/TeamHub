@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:touchscreenBlocksFocus="false"
-    android:background="@android:color/white"
+    android:background="@color/background_material_light"
     android:gravity="center_horizontal">
 
     <ScrollView
@@ -17,40 +19,42 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Sections">
+            android:id="@+id/Sections"
+            android:background="#ffdddddd">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="155dp"
                 android:gravity="top"
                 android:id="@+id/TopMenu"
-                android:background="#32cccccc"
+                android:background="#ff115bc1"
                 android:layout_marginBottom="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:textColor="#ff444444"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/primary_text_default_material_dark"
                     android:id="@+id/teamName"
-                    android:gravity="center"
-                    android:textSize="@dimen/abc_text_size_large_material" />
-
+                    android:textSize="@dimen/abc_text_size_large_material"
+                    android:gravity="center" />
             </LinearLayout>
 
             <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/NextFixture"
-                android:layout_marginBottom="20dp"
-                android:clickable="true">
+                android:clickable="true"
+                android:layout_margin="10dp"
+                android:background="#ffffffff">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:weightSum="1">
 
                     <TextView
                         android:layout_width="fill_parent"
@@ -60,7 +64,10 @@
                         android:id="@+id/resultsAndFixtures"
                         android:textColor="#ff444444"
                         android:gravity="top|center"
-                        android:layout_gravity="right|top" />
+                        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:minHeight="25dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -76,8 +83,9 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:id="@+id/homeTeam"
                             android:textColor="#ff444444"
-                            android:gravity="center"
-                            android:layout_weight="1" />
+                            android:gravity="center|right"
+                            android:layout_weight="1"
+                            android:layout_marginRight="10dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -109,8 +117,9 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:id="@+id/awayTeam"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            android:textColor="#ff444444" />
+                            android:gravity="left|center"
+                            android:textColor="#ff444444"
+                            android:layout_marginLeft="10dp" />
 
                     </LinearLayout>
 
@@ -121,6 +130,19 @@
                         android:id="@+id/locationAndTime"
                         android:gravity="center"
                         android:textColor="#ff444444" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/see_full_fixtures"
+                        android:id="@+id/seeFullFixtures"
+                        android:textColor="#ff444444"
+                        android:layout_gravity="right"
+                        android:clickable="true"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/abc_popup_background_mtrl_mult"
+                        android:minWidth="120dp"
+                        android:gravity="center_horizontal" />
                 </LinearLayout>
             </FrameLayout>
 
@@ -128,8 +150,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/LeagueTable"
-                android:background="@android:color/white"
-                android:layout_marginBottom="20dp">
+                android:background="#ffffffff"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -146,7 +168,11 @@
                         android:text="@string/league_table"
                         android:id="@+id/textView"
                         android:gravity="center"
-                        android:textColor="#ff444444" />
+                        android:textColor="#ff444444"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+                        android:minHeight="30dp" />
 
                     <TableLayout
                         android:layout_width="match_parent"
@@ -203,10 +229,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/see_full_table"
                         android:id="@+id/seeFullTable"
-                        android:textColor="@android:color/darker_gray"
+                        android:textColor="#ff444444"
                         android:layout_gravity="right"
                         android:clickable="true"
-                        android:layout_margin="10dp" />
+                        android:layout_margin="10dp"
+                        android:background="@drawable/abc_popup_background_mtrl_mult"
+                        android:gravity="center_horizontal"
+                        android:minWidth="120dp" />
 
                 </LinearLayout>
 
