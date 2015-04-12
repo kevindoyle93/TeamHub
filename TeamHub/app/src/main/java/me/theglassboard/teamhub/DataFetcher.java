@@ -119,8 +119,6 @@ public class DataFetcher extends AsyncTask<String, Void, Void> {
                 fixtureObjects.add((JSONObject)fixturesArray.get(i));
             }
 
-            // Try to set the MainActivity JSONObject
-            // myActivity.makeTeam();
             if(myActivity instanceof LoadInfo) {
 
                 ((LoadInfo) myActivity).setTeamsArray(teamObjects);
