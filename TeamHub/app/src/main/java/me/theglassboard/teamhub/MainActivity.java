@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
                 Log.d("Exception", "Couldn't load files", e);
             }
 
-            setContentView(R.layout.fragment_home);
+            setContentView(R.layout.home);
             makeTeams();
         }
         else {

@@ -1,5 +1,6 @@
 package me.theglassboard.teamhub;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -87,17 +88,9 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position);
-            }
-        });
+        mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
@@ -108,6 +101,15 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
                 }));
+
+
+        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectItem(position);
+            }
+        });
+
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -124,8 +126,11 @@ public class NavigationDrawerFragment extends Fragment {
      * @param drawerLayout The DrawerLayout containing this fragment's UI.
      */
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
+
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
+
+        mDrawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent));
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
