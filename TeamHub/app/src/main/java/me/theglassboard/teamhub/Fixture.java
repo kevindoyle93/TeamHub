@@ -1,10 +1,12 @@
 package me.theglassboard.teamhub;
 
 import android.app.Activity;
-import android.text.format.DateFormat;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -21,7 +23,7 @@ public class Fixture {
     private String date;
     private String referee;
 
-    // private SimpleDateFormat date;
+    private Date dateFormat;
 
     public Fixture() {
 
@@ -34,11 +36,24 @@ public class Fixture {
         this.homeScore = homeScore;
         this.awayScore = awayScore;
         this.location = location;
-        this.date = date;
         this.time = time;
         this.referee = referee;
 
-        // date = new SimpleDateFormat("EEE, d/MMM");
+        DateFormat originalFormat = new SimpleDateFormat("dd/MM/yy", Locale.ENGLISH);
+        DateFormat targetFormat = new SimpleDateFormat("EEE d MMM");
+
+        if(date != null) {
+
+            try {
+
+                dateFormat = originalFormat.parse(date);
+                this.date = targetFormat.format(dateFormat);
+
+            } catch (ParseException e) {
+
+                e.printStackTrace();
+            }
+        }
     }
 
 

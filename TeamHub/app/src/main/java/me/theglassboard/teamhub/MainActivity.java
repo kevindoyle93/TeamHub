@@ -38,8 +38,6 @@ public class MainActivity extends ActionBarActivity {
 
         if(jsonManager.fileExists(teamsFileName)) {
 
-            Log.d("onCreate", "IN THE IF");
-
             JSONParser parser = new JSONParser();
 
             Object obj;
@@ -48,7 +46,6 @@ public class MainActivity extends ActionBarActivity {
                 obj = jsonManager.readObject(teamsFileName);
                 obj = parser.parse((String) obj);
                 teamsJson = (JSONArray)obj;
-                Log.d("The teamsJson is", teamsJson.toString());
 
                 obj = parser.parse((String)jsonManager.readObject(fixturesFileName));
                 fixturesJson = (JSONArray)obj;
@@ -64,9 +61,6 @@ public class MainActivity extends ActionBarActivity {
             makeTeams();
         }
         else {
-
-            Log.d("onCreate", "IN THE ELSE");
-
             // Run the LoadInfoActivity
             Intent loadInfo = new Intent(MainActivity.this, LoadInfo.class);
             startActivity(loadInfo);

@@ -72,7 +72,7 @@ public class LeagueStats {
         positionTextView = new TextView(myActivity);
         positionTextView.setText(stats[0] + ".");
         positionTextView.setLayoutParams(statsParams);
-        positionTextView.setTextColor(Color.WHITE);
+        positionTextView.setTextColor(Color.DKGRAY);
         positionTextView.setGravity(Gravity.CENTER);
 
         positionTextView.setPadding(10, 0, 0, 0);
@@ -81,21 +81,21 @@ public class LeagueStats {
         clubTextView = new TextView(myActivity);
         clubTextView.setText(club);
         clubTextView.setLayoutParams(statsParams);
-        clubTextView.setTextColor(Color.WHITE);
+        clubTextView.setTextColor(Color.DKGRAY);
         clubTextView.setGravity(Gravity.LEFT);
         row.addView(clubTextView);
 
         playedTextView = new TextView(myActivity);
         playedTextView.setText(stats[1]);
         playedTextView.setLayoutParams(statsParams);
-        playedTextView.setTextColor(Color.WHITE);
+        playedTextView.setTextColor(Color.DKGRAY);
         playedTextView.setGravity(Gravity.CENTER);
         row.addView(playedTextView);
 
         pointsTextView = new TextView(myActivity);
         pointsTextView.setText(stats[8]);
         pointsTextView.setLayoutParams(statsParams);
-        pointsTextView.setTextColor(Color.WHITE);
+        pointsTextView.setTextColor(Color.DKGRAY);
         pointsTextView.setGravity(Gravity.CENTER);
         pointsTextView.setPadding(0, 0, 0, 10);
         row.addView(pointsTextView);
