@@ -7,15 +7,18 @@
     <string name="team_name">Grange Woodbine F.C.</string>
     <string name="crest_content_description">Crest</string>
 
+    // Menu tabs
+    <string name="home_tab">Home</string>
+    <string name="see_full_fixtures">Fixtures</string>
+    <string name="see_full_table">Table</string>
+
     // Next fixture
     <string name="next_fixture">Results and Fixtures</string>
-    <string name="see_full_fixtures">See all fixtures</string>
 
     // League table
     <string name="league_table">League Table</string>
     <string name="played">Pl</string>
     <string name="points">Pts</string>
-    <string name="see_full_table">See full table</string>
 
     // Training
     <string name="training">Training</string>
@@ -49,4 +52,8 @@
     <string name="title_section3">League Table</string>
     <string name="title_section4">Choose new team</string>
     <string name="title_activity_fixture_list">FixtureList</string>
+    <string name="title_activity_main_with_fragment">MainWithFragment</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

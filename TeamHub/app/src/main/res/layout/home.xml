@@ -10,238 +10,268 @@
     android:background="@color/background_material_light"
     android:gravity="center_horizontal">
 
-    <ScrollView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView" >
+        android:id="@+id/container">
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:gravity="top"
+            android:id="@+id/TeamTitle"
+            android:background="#ff115bc1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/primary_text_default_material_dark"
+                android:id="@+id/teamName"
+                android:textSize="@dimen/abc_text_size_large_material"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Sections"
+            android:background="#ff1365d1"
+            android:weightSum="1.0"
+            android:minHeight="40dp"
+            android:id="@+id/MenuOptions">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/home_tab"
+                android:id="@+id/homeButton"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.39"
+                android:textColor="@color/primary_text_default_material_dark"
+                android:padding="5dp"
+                android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/see_full_fixtures"
+                android:id="@+id/fixturesButton"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.39"
+                android:textColor="@color/primary_text_default_material_dark"
+                android:padding="5dp"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/see_full_table"
+                android:id="@+id/tableButton"
+                android:layout_gravity="bottom"
+                android:layout_weight="0.39"
+                android:textColor="@color/primary_text_default_material_dark"
+                android:padding="5dp"
+                android:clickable="true"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ScrollView"
             android:background="#ffdddddd">
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="155dp"
-                android:gravity="top"
-                android:id="@+id/TopMenu"
-                android:background="#ff115bc1"
-                android:layout_marginBottom="20dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/primary_text_default_material_dark"
-                    android:id="@+id/teamName"
-                    android:textSize="@dimen/abc_text_size_large_material"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/NextFixture"
-                android:clickable="true"
-                android:layout_margin="10dp"
-                android:background="#ffffffff">
+                android:id="@+id/Sections">
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <FrameLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/next_fixture"
-                        android:id="@+id/resultsAndFixtures"
-                        android:textColor="#ff444444"
-                        android:gravity="top|center"
-                        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:minHeight="25dp" />
+                    android:id="@+id/NextFixture"
+                    android:clickable="true"
+                    android:layout_margin="10dp"
+                    android:background="#ffffffff">
 
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/Teams"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp">
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:weightSum="1">
 
                         <TextView
                             android:layout_width="fill_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/homeTeam"
+                            android:text="@string/next_fixture"
+                            android:id="@+id/resultsAndFixtures"
                             android:textColor="#ff444444"
-                            android:gravity="center|right"
-                            android:layout_weight="1"
-                            android:layout_marginRight="10dp" />
+                            android:gravity="top|center"
+                            android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:minHeight="25dp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:id="@+id/homeScore"
-                            android:gravity="center"
-                            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                            android:textColor="@android:color/darker_gray" />
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Teams"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp">
 
-                        <TextView
-                            android:layout_width="19dp"
-                            android:layout_height="fill_parent"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/versus"
-                            android:textColor="@android:color/darker_gray"
-                            android:gravity="center" />
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="match_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/homeTeam"
+                                android:textColor="#ff444444"
+                                android:gravity="center|right"
+                                android:layout_weight="1"
+                                android:layout_marginRight="10dp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:id="@+id/awayScore"
-                            android:gravity="center"
-                            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                            android:textColor="@android:color/darker_gray" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:id="@+id/homeScore"
+                                android:gravity="center"
+                                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                                android:textColor="@android:color/darker_gray" />
+
+                            <TextView
+                                android:layout_width="19dp"
+                                android:layout_height="fill_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/versus"
+                                android:textColor="@android:color/darker_gray"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:id="@+id/awayScore"
+                                android:gravity="center"
+                                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                                android:textColor="@android:color/darker_gray" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="match_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/awayTeam"
+                                android:layout_weight="1"
+                                android:gravity="left|center"
+                                android:textColor="#ff444444"
+                                android:layout_marginLeft="10dp" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="fill_parent"
-                            android:layout_height="match_parent"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/awayTeam"
-                            android:layout_weight="1"
-                            android:gravity="left|center"
-                            android:textColor="#ff444444"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:id="@+id/locationAndTime"
+                            android:gravity="center"
+                            android:textColor="#ff444444" />
 
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:id="@+id/locationAndTime"
-                        android:gravity="center"
-                        android:textColor="#ff444444" />
+                </FrameLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/see_full_fixtures"
-                        android:id="@+id/seeFullFixtures"
-                        android:textColor="#ff444444"
-                        android:layout_gravity="right"
-                        android:clickable="true"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                        android:minWidth="120dp"
-                        android:gravity="center_horizontal" />
-                </LinearLayout>
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/LeagueTable"
-                android:background="#ffffffff"
-                android:layout_margin="10dp">
-
-                <LinearLayout
-                    android:orientation="vertical"
+                <FrameLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/LeagueTableContainer">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/LeagueTable"
+                    android:background="#ffffffff"
+                    android:layout_margin="10dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/league_table"
-                        android:id="@+id/textView"
-                        android:gravity="center"
-                        android:textColor="#ff444444"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
-                        android:minHeight="30dp" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/LeagueTableContainer">
 
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/Table"
-                        android:stretchColumns="1"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
-
-                        <TableRow
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/LeagueTableHeadings">
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/league_table"
+                            android:id="@+id/textView"
+                            android:gravity="center"
+                            android:textColor="#ff444444"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+                            android:minHeight="30dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Table"
+                            android:stretchColumns="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp">
+
+                            <TableRow
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:id="@+id/positionColumn"
-                                android:textColor="@android:color/darker_gray"
-                                android:singleLine="false"
-                                android:layout_margin="5dp" />
+                                android:id="@+id/LeagueTableHeadings">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/teamColumn"
-                                android:textColor="@android:color/darker_gray"
-                                android:layout_margin="5dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:id="@+id/positionColumn"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:singleLine="false"
+                                    android:layout_margin="5dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/played"
-                                android:id="@+id/playedColumn"
-                                android:textColor="@android:color/darker_gray"
-                                android:gravity="center"
-                                android:layout_margin="5dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/teamColumn"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:layout_margin="5dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/points"
-                                android:id="@+id/pointsColumn"
-                                android:textColor="@android:color/darker_gray"
-                                android:gravity="center"
-                                android:layout_margin="5dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/played"
+                                    android:id="@+id/playedColumn"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:gravity="center"
+                                    android:layout_margin="5dp" />
 
-                        </TableRow>
-                    </TableLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/points"
+                                    android:id="@+id/pointsColumn"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:gravity="center"
+                                    android:layout_margin="5dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/see_full_table"
-                        android:id="@+id/seeFullTable"
-                        android:textColor="#ff444444"
-                        android:layout_gravity="right"
-                        android:clickable="true"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                        android:gravity="center_horizontal"
-                        android:minWidth="120dp" />
+                            </TableRow>
+                        </TableLayout>
 
-                </LinearLayout>
+                    </LinearLayout>
 
-            </FrameLayout>
+                </FrameLayout>
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </RelativeLayout>

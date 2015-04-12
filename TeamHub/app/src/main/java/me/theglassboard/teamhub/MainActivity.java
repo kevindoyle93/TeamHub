@@ -1,7 +1,11 @@
 package me.theglassboard.teamhub;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +24,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
@@ -68,6 +74,17 @@ public class MainActivity extends ActionBarActivity {
             Intent loadInfo = new Intent(MainActivity.this, LoadInfo.class);
             startActivity(loadInfo);
         }
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        FragmentHome homeFragment = new FragmentHome();
+        fragmentTransaction.replace(R.id.Sections, homeFragment);
+
+        /*FragmentFixtures fixturesFragment = new FragmentFixtures();
+        fragmentTransaction.replace(R.id.Sections, fixturesFragment);*/
+
+        fragmentTransaction.commit();
 
     }
 
@@ -211,7 +228,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void setListeners() {
 
-        TextView fixturesButton = (TextView)findViewById(R.id.seeFullFixtures);
+        TextView fixturesButton = (TextView)findViewById(R.id.fixturesButton);
 
         fixturesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -221,7 +238,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        TextView leagueTablesButton = (TextView)findViewById(R.id.seeFullTable);
+        TextView leagueTablesButton = (TextView)findViewById(R.id.tableButton);
 
         leagueTablesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
