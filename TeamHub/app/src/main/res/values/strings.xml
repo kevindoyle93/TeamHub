@@ -43,7 +43,7 @@
     <string name="title_activity_load_info">LoadInfo</string>
     <string name="title_activity_home">Home</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Home</string>
+    <string name="title_section2">Results and Fixtures</string>
+    <string name="title_section3">League Table</string>
 </resources>

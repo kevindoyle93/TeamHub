@@ -116,8 +116,6 @@ public class Home extends ActionBarActivity
 
             currentTeam = (JSONObject)teamsJson.get(i);
 
-            Log.d("CURRENT TEAM NAME" , (String) (currentTeam.get("team")));
-
             String teamName = (String) (currentTeam.get("team"));
             String teamAgeGroup = "";
             String teamHomePitch = "";

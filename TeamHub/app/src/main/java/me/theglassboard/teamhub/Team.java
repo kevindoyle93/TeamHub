@@ -63,6 +63,8 @@ public class Team {
 
         TextView textViewToChange;
 
+        Log.d("CURRENT TEAM NAME" , club);
+
         textViewToChange = (TextView)myActivity.findViewById(R.id.teamName);
         textViewToChange.setText(club.toUpperCase());
 
