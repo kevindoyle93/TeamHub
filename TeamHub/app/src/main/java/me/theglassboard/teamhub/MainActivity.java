@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
     private Fragment fragment;
     private FragmentHome homeFragment;
     private FragmentFixtures fixturesFragment;
+    private FragmentTable tableFragment;
 
 
     @Override
@@ -80,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
 
             setUpHomeFragment();
             setUpFixturesFragment();
+            setUpTableFragment();
 
             switchContent(homeFragment);
 
@@ -111,6 +113,12 @@ public class MainActivity extends ActionBarActivity {
 
         fixturesFragment = new FragmentFixtures();
         fixturesFragment.setTeam(teams.get(currentTeamPosition));
+    }
+
+    private void setUpTableFragment() {
+
+        tableFragment = new FragmentTable();
+        tableFragment.setTeams(teams);
     }
 
     public void makeTeams() {
@@ -220,8 +228,6 @@ public class MainActivity extends ActionBarActivity {
         homButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                switchContent(homeFragment);
-
                 TextView thisButton;
                 TextView oldButton;
 
@@ -234,6 +240,8 @@ public class MainActivity extends ActionBarActivity {
                     oldButton = (TextView)findViewById(R.id.tableButton);
 
                 changeButtonColours(oldButton, thisButton);
+
+                switchContent(homeFragment);
             }
         });
 
@@ -241,8 +249,6 @@ public class MainActivity extends ActionBarActivity {
 
         fixturesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-
-                switchContent(fixturesFragment);
 
                 TextView thisButton;
                 TextView oldButton;
@@ -256,15 +262,30 @@ public class MainActivity extends ActionBarActivity {
                     oldButton = (TextView)findViewById(R.id.tableButton);
 
                 changeButtonColours(oldButton, thisButton);
+
+                switchContent(fixturesFragment);
             }
         });
 
         TextView leagueTablesButton = (TextView)findViewById(R.id.tableButton);
 
         leagueTablesButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+            public void onClick(View v) {
 
-                //switchContent();
+                TextView thisButton;
+                TextView oldButton;
+
+                // Change the highlighted TextView
+                thisButton = (TextView) findViewById(R.id.tableButton);
+
+                if (fragment instanceof FragmentHome)
+                    oldButton = (TextView) findViewById(R.id.homeButton);
+                else
+                    oldButton = (TextView) findViewById(R.id.fixturesButton);
+
+                changeButtonColours(oldButton, thisButton);
+
+                switchContent(tableFragment);
             }
         });
     }
