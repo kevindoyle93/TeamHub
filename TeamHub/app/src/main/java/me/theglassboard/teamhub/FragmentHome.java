@@ -22,8 +22,7 @@ import java.util.ArrayList;
 
 public class FragmentHome extends Fragment {
 
-
-    // Variables to hold informatio to be used/displayed
+    // Variables to hold information to be used/displayed
     private JSONArray teamsJson;
     private JSONArray fixturesJson;
     private int currentTeamPosition;
@@ -33,28 +32,40 @@ public class FragmentHome extends Fragment {
 
     public void setFixturesJson(JSONArray fixturesJson) {
         this.fixturesJson = fixturesJson;
+        Log.d("FIXTURES JSON", this.fixturesJson.toString());
     }
 
     public void setTeamsJson(JSONArray teamsJson) {
         this.teamsJson = teamsJson;
+        Log.d("TEAM JSON", this.teamsJson.toString());
     }
 
     public void setCurrentTeamPosition(int currentTeamPosition) {
         this.currentTeamPosition = currentTeamPosition;
+        Log.d("CURRENT TEAM POS", this.currentTeam.toString());
     }
 
     public void setCurrentTeam(JSONObject currentTeam) {
         this.currentTeam = currentTeam;
+        Log.d("CURRENT TEAM", this.currentTeam.toString());
     }
 
     public void setTeams(ArrayList<Team> teams) {
         this.teams = teams;
+        Log.d("TEAMS", this.teams.toString());
     }
 
 
     // The Views that can be accessed/altered in this fragment
+    private TextView fixtureHeadingView;
     private TextView homeTeamView;
+    private TextView homeScoreView;
+    private TextView versusView;
+    private TextView awayScoreView;
     private TextView awayTeamView;
+    private TextView locationAndDateView;
+    private TableLayout leagueTableView;
+
     private Activity currentActivity;
 
 
@@ -67,11 +78,42 @@ public class FragmentHome extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        Fixture f = teams.get(currentTeamPosition).getFixture(teams.get(currentTeamPosition).getLatestMatch());
+
         // Assign the Views
         homeTeamView = (TextView)view.findViewById(R.id.homeTeam);
-        ((MainActivity)getActivity()).setTextViews(homeTeamView);
+        setView(homeTeamView, f.getHomeTeam());
+
+        if (f.getHomeScore() != null) {
+
+            homeScoreView = (TextView) view.findViewById(R.id.homeScore);
+            setView(homeScoreView, f.getHomeScore());
+
+            awayScoreView = (TextView) view.findViewById(R.id.awayScore);
+            setView(awayScoreView, f.getAwayScore());
+
+            fixtureHeadingView = (TextView) view.findViewById(R.id.resultsAndFixtures);
+            setView(fixtureHeadingView, "Latest Result");
+        }
+        else  {
+
+            fixtureHeadingView = (TextView) view.findViewById(R.id.resultsAndFixtures);
+            setView(fixtureHeadingView, "Next Fixture");
+        }
+
+        versusView = (TextView) view.findViewById((R.id.versus));
+        setView(versusView, "-");
+
+        locationAndDateView = (TextView)view.findViewById(R.id.locationAndTime);
+        setView(locationAndDateView, f.getLocation() + ", " + f.getDate() + " " + f.getTime());
+
         awayTeamView = (TextView)view.findViewById(R.id.awayTeam);
-        setViews(awayTeamView, teams.get(currentTeamPosition).getFixture(teams.get(currentTeamPosition).getLatestMatch()).getAwayTeam());
+        setView(awayTeamView, f.getAwayTeam());
+
+
+        // Make the league table
+        leagueTableView = (TableLayout)view.findViewById(R.id.Table);
+        createLeagueTable(leagueTableView);
 
         return view;
     }
@@ -176,14 +218,13 @@ public class FragmentHome extends Fragment {
 
     public TextView getHomeTeamView() { return homeTeamView; }
 
-    private void setViews(TextView textView, String text) {
+    private void setView(TextView textView, String text) {
 
         textView.setText(text);
     }
 
-    private void createLeagueTable() {
+    private void createLeagueTable(TableLayout leagueTable) {
 
-        final TableLayout leagueTable = (TableLayout)currentActivity.findViewById(R.id.Table);
         int teamsToDisplay = 3;
 
         // My edge cases are if the current team are first or last
@@ -191,7 +232,7 @@ public class FragmentHome extends Fragment {
 
             for(int i = 0; i < teamsToDisplay; i++) {
 
-                TableRow row = teams.get(i).getLeagueStats().setViews(currentActivity, teams.get(i).getClub());
+                TableRow row = teams.get(i).getLeagueStats().setViews(getActivity(), teams.get(i).getClub());
                 leagueTable.addView(row);
             }
         }
@@ -199,7 +240,7 @@ public class FragmentHome extends Fragment {
 
             for(int i = (currentTeamPosition - teamsToDisplay + 1); i < teams.size(); i++) {
 
-                TableRow row = teams.get(i).getLeagueStats().setViews(currentActivity, teams.get(i).getClub());
+                TableRow row = teams.get(i).getLeagueStats().setViews(getActivity(), teams.get(i).getClub());
                 leagueTable.addView(row);
             }
         }
@@ -207,7 +248,7 @@ public class FragmentHome extends Fragment {
 
             for(int i = currentTeamPosition - 1; i < (currentTeamPosition - 1 + teamsToDisplay); i++) {
 
-                TableRow row = teams.get(i).getLeagueStats().setViews(currentActivity, teams.get(i).getClub());
+                TableRow row = teams.get(i).getLeagueStats().setViews(getActivity(), teams.get(i).getClub());
                 leagueTable.addView(row);
             }
         }

@@ -71,13 +71,13 @@ public class Fixture {
 
     public String getHomeScore() { return homeScore; }
 
-    public String getLocation() {
-        return location;
-    }
+    public String getLocation() { return location; }
 
     public String getTime() {
         return time;
     }
+
+    public String getDate() { return date; }
 
     public String getReferee() {
         return referee;

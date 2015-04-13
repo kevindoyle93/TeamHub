@@ -23,7 +23,7 @@ import org.json.simple.parser.ParseException;
 import java.util.ArrayList;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
     private JSONArray teamsJson;
     private JSONArray fixturesJson;
@@ -32,6 +32,7 @@ public class MainActivity extends FragmentActivity {
     private ArrayList<Team> teams;
 
     private Fragment fragment;
+    private FragmentHome homeFragment;
 
 
     @Override
@@ -70,6 +71,20 @@ public class MainActivity extends FragmentActivity {
                 Log.d("Exception", "Couldn't load files", e);
             }
 
+            setContentView(R.layout.home);
+            setListeners();
+            makeTeams();
+            setTextView((TextView)findViewById(R.id.teamName), teams.get(currentTeamPosition).getClub());
+
+            homeFragment = new FragmentHome();
+            homeFragment.setCurrentTeam(currentTeam);
+            homeFragment.setCurrentTeamPosition(currentTeamPosition);
+            homeFragment.setFixturesJson(fixturesJson);
+            homeFragment.setTeams(teams);
+            homeFragment.setTeamsJson(teamsJson);
+
+            switchContent(homeFragment);
+
         }
         else {
             // Run the LoadInfoActivity
@@ -77,27 +92,11 @@ public class MainActivity extends FragmentActivity {
             startActivity(loadInfo);
         }
 
-        setContentView(R.layout.home);
-        setListeners();
-
-        FragmentHome homeFragment = new FragmentHome();
-        homeFragment.setCurrentTeam(currentTeam);
-        homeFragment.setCurrentTeamPosition(currentTeamPosition);
-        homeFragment.setFixturesJson(fixturesJson);
-        homeFragment.setTeams(teams);
-        homeFragment.setTeamsJson(teamsJson);
-
-        switchContent(homeFragment);
-
-        //makeTeams();
-        // ((FragmentHome)fragment).readData();
-
     }
 
-    public void setTextViews(TextView textView) {
+    private void setTextView(TextView textView, String text) {
 
-        textView.setText("TEAM!");
-        //textView.setText(teams.get(currentTeamPosition).getFixture(teams.get(currentTeamPosition).getLatestMatch()).getHomeTeam());
+        textView.setText(text);
     }
 
 
@@ -158,37 +157,6 @@ public class MainActivity extends FragmentActivity {
         //createLeagueTable();
     }
 
-    private void createLeagueTable() {
-
-        final TableLayout leagueTable = (TableLayout)findViewById(R.id.Table);
-        int teamsToDisplay = 3;
-
-        // My edge cases are if the current team are first or last
-        if(currentTeamPosition == 0) {
-
-            for(int i = 0; i < teamsToDisplay; i++) {
-
-                TableRow row = teams.get(i).getLeagueStats().setViews(this, teams.get(i).getClub());
-                leagueTable.addView(row);
-            }
-        }
-        else if(currentTeamPosition == teams.size() - 1) {
-
-            for(int i = (currentTeamPosition - teamsToDisplay + 1); i < teams.size(); i++) {
-
-                TableRow row = teams.get(i).getLeagueStats().setViews(this, teams.get(i).getClub());
-                leagueTable.addView(row);
-            }
-        }
-        else {
-
-            for(int i = currentTeamPosition - 1; i < (currentTeamPosition - 1 + teamsToDisplay); i++) {
-
-                TableRow row = teams.get(i).getLeagueStats().setViews(this, teams.get(i).getClub());
-                leagueTable.addView(row);
-            }
-        }
-    }
 
     private String splitDateAndTime(String whole, String split) {
 
@@ -239,7 +207,7 @@ public class MainActivity extends FragmentActivity {
         homButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                switchContent(new FragmentHome());
+                switchContent(homeFragment);
             }
         });
 
@@ -270,8 +238,6 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void switchContent(Fragment fragment) {
-
-        this.fragment = fragment;
 
         getSupportFragmentManager()
                 .beginTransaction()
