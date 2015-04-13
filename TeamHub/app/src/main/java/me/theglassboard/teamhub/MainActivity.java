@@ -3,6 +3,7 @@ package me.theglassboard.teamhub;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
@@ -75,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
             setContentView(R.layout.home);
             setListeners();
             makeTeams();
-            setTextView((TextView)findViewById(R.id.teamName), teams.get(currentTeamPosition).getClub());
+            setTextView((TextView) findViewById(R.id.teamName), teams.get(currentTeamPosition).getClub());
 
             setUpHomeFragment();
             setUpFixturesFragment();
@@ -214,12 +215,25 @@ public class MainActivity extends ActionBarActivity {
 
     private void setListeners() {
 
-        final TextView homButton = (TextView)findViewById(R.id.homeButton);
+        TextView homButton = (TextView)findViewById(R.id.homeButton);
 
         homButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
                 switchContent(homeFragment);
+
+                TextView thisButton;
+                TextView oldButton;
+
+                // Change the highlighted TextView
+                thisButton = (TextView)findViewById(R.id.homeButton);
+
+                if(fragment instanceof FragmentFixtures)
+                    oldButton = (TextView)findViewById(R.id.fixturesButton);
+                else
+                    oldButton = (TextView)findViewById(R.id.tableButton);
+
+                changeButtonColours(oldButton, thisButton);
             }
         });
 
@@ -230,12 +244,18 @@ public class MainActivity extends ActionBarActivity {
 
                 switchContent(fixturesFragment);
 
-                // Change the highlighted TextView
-                /*TextView textViewToChange = (TextView)findViewById(R.id.fixturesButton);
-                Uri path = Uri.parse("android.resource://com.segf4ult.test/" + R.drawable.abc_cab_background_top_mtrl_alpha);
-                Drawable underline = Drawable.createFromPath(path);
-                textViewToChange.setBackground(underline);*/
+                TextView thisButton;
+                TextView oldButton;
 
+                // Change the highlighted TextView
+                thisButton = (TextView)findViewById(R.id.fixturesButton);
+
+                if(fragment instanceof FragmentHome)
+                    oldButton = (TextView)findViewById(R.id.homeButton);
+                else
+                    oldButton = (TextView)findViewById(R.id.tableButton);
+
+                changeButtonColours(oldButton, thisButton);
             }
         });
 
@@ -251,12 +271,20 @@ public class MainActivity extends ActionBarActivity {
 
     public void switchContent(Fragment fragment) {
 
+        this.fragment = fragment;
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.Sections, fragment)
                 .commit();
 
         invalidateOptionsMenu();
+    }
+
+    private void changeButtonColours(TextView oldFragment, TextView newFragment) {
+
+        oldFragment.setBackgroundColor(getResources().getColor(R.color.background_dark));
+        newFragment.setBackgroundColor(getResources().getColor(R.color.background_light));
     }
 
 

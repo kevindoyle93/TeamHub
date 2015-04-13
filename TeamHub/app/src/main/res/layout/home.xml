@@ -37,7 +37,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ff1365d1"
+            android:background="@color/background_dark"
             android:weightSum="3"
             android:minHeight="40dp"
             android:id="@+id/MenuOptions">
@@ -52,7 +52,8 @@
                 android:layout_weight="1"
                 android:textColor="@color/primary_text_default_material_dark"
                 android:padding="5dp"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:background="@color/background_light" />
 
             <TextView
                 android:layout_width="match_parent"
