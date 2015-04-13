@@ -132,6 +132,13 @@ public class DataFetcher extends AsyncTask<String, Void, Void> {
 
             System.out.println("position: " + pe.getPosition());
             System.out.println(pe);
+
+        } catch (NullPointerException e) {
+
+            if(myActivity instanceof LoadInfo) {
+
+                ((LoadInfo) myActivity).noResponseFromInternet();
+            }
         }
 
         // TODO: Do all assigning/creating of teams, fixtures, etc.

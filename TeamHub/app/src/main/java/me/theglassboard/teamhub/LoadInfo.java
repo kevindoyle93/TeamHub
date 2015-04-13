@@ -42,6 +42,8 @@ public class LoadInfo extends ActionBarActivity {
     private String fixtures;    // String representation of the JSONObject used in MainActivity
     private JSONArray teamsArray;
     private int teamChoice;
+    private boolean divisionChoosen;
+    private boolean teamsLoaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,11 +96,16 @@ public class LoadInfo extends ActionBarActivity {
                                                int arg2, long arg3) {
                         int position = divisionDropdown.getSelectedItemPosition() - 1;
 
-                        if(position >= 0)
+                        if(position >= 0) {
+
                             fetchData(divisions[position].getId());
 
-                        Toast fetchingTeams = Toast.makeText(getApplicationContext(), "Fetching teams", Toast.LENGTH_SHORT);
-                        fetchingTeams.show();
+                            Toast fetchingTeams = Toast.makeText(getApplicationContext(), "Fetching teams in: " + divisions[position].getName(), Toast.LENGTH_SHORT);
+                            fetchingTeams.show();
+
+                            divisionChoosen = true;
+                        }
+
                     }
 
                     @Override
@@ -123,10 +130,23 @@ public class LoadInfo extends ActionBarActivity {
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                saveData();
+                if(teamsLoaded) {
 
-                Intent mainScreen = new Intent(LoadInfo.this, MainActivity.class);
-                startActivity(mainScreen);
+                    saveData();
+
+                    Intent mainScreen = new Intent(LoadInfo.this, MainActivity.class);
+                    startActivity(mainScreen);
+                }
+                else if(divisionChoosen){
+
+                    Toast notReady = Toast.makeText(getApplicationContext(), "Still downloading...", Toast.LENGTH_SHORT);
+                    notReady.show();
+                }
+                else{
+
+                    Toast notReady = Toast.makeText(getApplicationContext(), "Select a division", Toast.LENGTH_SHORT);
+                    notReady.show();
+                }
             }
         });
     }
@@ -196,6 +216,19 @@ public class LoadInfo extends ActionBarActivity {
                     }
                 }
         );
+
+        teamsLoaded = true;
+    }
+
+    public void noResponseFromInternet() {
+
+        String errorMessage = "No response from the server. Check your connectivity.";
+
+        Toast noResponse = Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG);
+        noResponse.show();
+        
+        Intent restart = new Intent(this, LoadInfo.class);
+        startActivity(restart);
     }
 
     @Override
