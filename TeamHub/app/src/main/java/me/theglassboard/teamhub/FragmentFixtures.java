@@ -33,7 +33,7 @@ public class FragmentFixtures extends Fragment {
         LinearLayout fixtureContainer;
 
         LinearLayout.LayoutParams fixtureContainerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        fixtureContainerParams.setMargins(0, 0, 0, 8);
+        fixtureContainerParams.setMargins(0, 0, 0, 12);
 
         LinearLayout.LayoutParams teamNameParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f);
         LinearLayout.LayoutParams scoreParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -46,7 +46,7 @@ public class FragmentFixtures extends Fragment {
         TextView awayScore;
         TextView awayTeam;
 
-        // TODO: For each fixture, add a horizontal LinearLayout and add five TextViews to that to display the information
+
         for(int i = team.numberOfFixtures(); i > 0; i--) {
 
             Fixture f = team.getFixture(i - 1);
@@ -70,6 +70,7 @@ public class FragmentFixtures extends Fragment {
                 homeScore.setLayoutParams(scoreParams);
                 homeScore.setText(f.getHomeScore());
                 homeScore.setGravity(Gravity.CENTER);
+                homeScore.setTextColor(Color.DKGRAY);
                 homeScore.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
                 fixtureContainer.addView(homeScore);
 
@@ -77,6 +78,7 @@ public class FragmentFixtures extends Fragment {
                 versus.setLayoutParams(versusParams);
                 versus.setText("-");
                 versus.setGravity(Gravity.CENTER);
+                versus.setTextColor(Color.DKGRAY);
                 versus.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
                 fixtureContainer.addView(versus);
 
@@ -84,6 +86,7 @@ public class FragmentFixtures extends Fragment {
                 awayScore.setLayoutParams(scoreParams);
                 awayScore.setText(f.getAwayScore());
                 awayScore.setGravity(Gravity.CENTER);
+                awayScore.setTextColor(Color.DKGRAY);
                 awayScore.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
                 fixtureContainer.addView(awayScore);
             }
@@ -93,6 +96,7 @@ public class FragmentFixtures extends Fragment {
                 date.setLayoutParams(scoreParams);
                 date.setGravity(Gravity.CENTER);
                 date.setText(f.getDate());
+                date.setTextColor(Color.DKGRAY);
                 date.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
                 fixtureContainer.addView(date);
             }

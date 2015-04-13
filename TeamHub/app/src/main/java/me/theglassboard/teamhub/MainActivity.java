@@ -323,19 +323,9 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
             startActivity(new Intent(this, LoadInfo.class));
-        }
-
-        if(id == R.id.refresh_settings) {
-
-            /*Log.d("Next team", "" + (teamPosition + 1) % dataFetcher.getNumberOfTeams());
-            teamPosition = (teamPosition + 1) % dataFetcher.getNumberOfTeams();
-
-            dataFetcher = new DataFetcher(this);
-            dataFetcher.execute();*/
         }
 
         return super.onOptionsItemSelected(item);

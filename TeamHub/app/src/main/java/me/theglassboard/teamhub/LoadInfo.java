@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 
@@ -40,9 +42,14 @@ public class LoadInfo extends ActionBarActivity {
     private DataFetcher dataFetcher;
 
     private String fixtures;    // String representation of the JSONObject used in MainActivity
+
+    // Try using an array list of JSONArray to add the possibility of more leagues being loaded
+    private ArrayList<JSONArray> divisionsJson;
+
     private JSONArray teamsArray;
+    private int divisionChoice;
     private int teamChoice;
-    private boolean divisionChoosen;
+    private boolean divisionChosen;
     private boolean teamsLoaded;
 
     @Override
@@ -50,6 +57,8 @@ public class LoadInfo extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_info);
+
+        checkForExistingFiles();
 
         // Create and populate the divisions array
         divisions = new Division[13];
@@ -66,6 +75,9 @@ public class LoadInfo extends ActionBarActivity {
         divisions[10] = new Division("Senior Sunday", "1051");
         divisions[11] = new Division("Division 1 Sunday", "1055");
         divisions[12] = new Division("Division 3 Sunday", "1056");
+
+        divisionsJson = new ArrayList<>();
+        divisionChoice = -1;
 
         // List the available divisions
         final Spinner divisionDropdown = (Spinner)findViewById(R.id.divisionsDropdown);
@@ -103,7 +115,7 @@ public class LoadInfo extends ActionBarActivity {
                             Toast fetchingTeams = Toast.makeText(getApplicationContext(), "Fetching teams in: " + divisions[position].getName(), Toast.LENGTH_SHORT);
                             fetchingTeams.show();
 
-                            divisionChoosen = true;
+                            divisionChosen = true;
                         }
 
                     }
@@ -119,11 +131,18 @@ public class LoadInfo extends ActionBarActivity {
         // once this is chosen. The default teamChoice will be 0.
         teamChoice = 0;
 
-        final Spinner teamDropdown = (Spinner)findViewById(R.id.teamsDropdown);
-        ArrayList<String> items2 = new ArrayList<>();
-        items2.add("Choose your division first");
-        adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
-        teamDropdown.setAdapter(adapter2);
+        if(divisionsJson == null) {
+
+            final Spinner teamDropdown = (Spinner) findViewById(R.id.teamsDropdown);
+            ArrayList<String> items2 = new ArrayList<>();
+            items2.add("Choose your division first");
+            adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+            teamDropdown.setAdapter(adapter2);
+        }
+        else {
+
+            makeTeamDropdown();
+        }
 
         Button btn = (Button)findViewById(R.id.open_activity_button);
 
@@ -137,7 +156,7 @@ public class LoadInfo extends ActionBarActivity {
                     Intent mainScreen = new Intent(LoadInfo.this, MainActivity.class);
                     startActivity(mainScreen);
                 }
-                else if(divisionChoosen){
+                else if(divisionChosen){
 
                     Toast notReady = Toast.makeText(getApplicationContext(), "Still downloading...", Toast.LENGTH_SHORT);
                     notReady.show();
@@ -163,11 +182,40 @@ public class LoadInfo extends ActionBarActivity {
         ObjectManager objectManager = new ObjectManager(LoadInfo.this);
 
         String[] fileNames = {"teamsJSONArray", "fixturesJSONArray", "currentTeam"};
-        String currentTeam = (String)((JSONObject)teamsArray.get(teamChoice)).get("team");
+        String currentTeam = (String)((JSONObject)divisionsJson.get(divisionChoice).get(teamChoice)).get("team");
 
-        objectManager.saveObject(teamsArray.toString(), fileNames[0]);
+        objectManager.saveObject(divisionsJson.get(divisionChoice).toString(), fileNames[0]);
         objectManager.saveObject(fixtures, fileNames[1]);
         objectManager.saveObject(currentTeam, fileNames[2]);
+    }
+
+    private void checkForExistingFiles() {
+
+        ObjectManager objectManager = new ObjectManager(this);
+
+        String[] fileNames = {"teamsJSONArray", "fixturesJSONArray"};
+
+        if(!objectManager.fileExists(fileNames[0])) {
+
+            return;
+        }
+
+        JSONParser parser = new JSONParser();
+
+        try {
+
+            Object obj = objectManager.readObject(fileNames[0]);
+            addDivisionToArray((JSONArray) parser.parse((String)obj));
+
+            obj = objectManager.readObject(fileNames[1]);
+            setFixtures((String)obj);
+
+        } catch (ParseException e) {
+
+            Log.d("ERROR", "LOADING PREVIOUS FILES");
+        }
+
+
     }
 
     public void setFixtures(String fixtures) { this.fixtures = fixtures; }
@@ -183,6 +231,18 @@ public class LoadInfo extends ActionBarActivity {
 
     }
 
+    public void addDivisionToArray(ArrayList<JSONObject> teams) {
+
+        teamsArray = new JSONArray();
+
+        for(int i = 0; i < teams.size(); i++)
+            teamsArray.add(teams.get(i));
+
+        divisionsJson.add(teamsArray);
+
+        divisionChoice++;
+    }
+
     public void makeTeamDropdown() {
 
         // List the teams according to the division
@@ -190,9 +250,9 @@ public class LoadInfo extends ActionBarActivity {
 
         ArrayList<String> items = new ArrayList<>();
 
-        for(int i = 0; i < teamsArray.size(); i++) {
+        for(int i = 0; i < divisionsJson.get(divisionChoice).size(); i++) {
 
-            JSONObject team = (JSONObject)teamsArray.get(i);
+            JSONObject team = (JSONObject)divisionsJson.get(divisionChoice).get(i);
             items.add((String) team.get("team"));
         }
 
@@ -226,7 +286,7 @@ public class LoadInfo extends ActionBarActivity {
 
         Toast noResponse = Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG);
         noResponse.show();
-        
+
         Intent restart = new Intent(this, LoadInfo.class);
         startActivity(restart);
     }

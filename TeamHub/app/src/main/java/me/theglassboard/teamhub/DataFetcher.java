@@ -92,8 +92,12 @@ public class DataFetcher extends AsyncTask<String, Void, Void> {
 
         } catch (IOException e) {
             // e.printStackTrace();
-            Log.d("EXCEPTION: ", "Getting JSON didn't work.", e);
+            Log.d("EXCEPTION", "Getting JSON didn't work.", e);
 
+            return null;
+        } catch (NullPointerException e) {
+
+            Log.d("EXCEPTION", "No response from server");
             return null;
         }
 
@@ -123,7 +127,8 @@ public class DataFetcher extends AsyncTask<String, Void, Void> {
 
             if(myActivity instanceof LoadInfo) {
 
-                ((LoadInfo) myActivity).setTeamsArray(teamObjects);
+                ((LoadInfo) myActivity).addDivisionToArray(teamObjects);
+                //((LoadInfo) myActivity).setTeamsArray(teamObjects);
                 ((LoadInfo) myActivity).setFixtures(fixturesJson);
                 ((LoadInfo) myActivity).makeTeamDropdown();
             }
@@ -140,8 +145,6 @@ public class DataFetcher extends AsyncTask<String, Void, Void> {
                 ((LoadInfo) myActivity).noResponseFromInternet();
             }
         }
-
-        // TODO: Do all assigning/creating of teams, fixtures, etc.
     }
 
 

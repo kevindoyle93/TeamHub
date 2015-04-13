@@ -32,7 +32,7 @@ public class ObjectManager {
             if (!file.exists())
                 file.createNewFile();
 
-            // Adds a line to the trace file
+            // Adds a line to the file
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             writer.write(jsonString);
             writer.close();
