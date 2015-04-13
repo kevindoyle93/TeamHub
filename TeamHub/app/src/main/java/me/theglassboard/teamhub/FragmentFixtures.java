@@ -32,7 +32,6 @@ public class FragmentFixtures extends Fragment {
         LinearLayout fixtureContainer;
 
         LinearLayout.LayoutParams fixtureContainerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        fixtureContainerParams.setMargins(0, 5, 0, 5);
 
         LinearLayout.LayoutParams teamNameParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f);
         LinearLayout.LayoutParams scoreParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -46,13 +45,14 @@ public class FragmentFixtures extends Fragment {
         TextView awayTeam;
 
         // TODO: For each fixture, add a horizontal LinearLayout and add five TextViews to that to display the information
-        for(Fixture f : team.getAllFixtures()) {
+        for(int i = team.numberOfFixtures(); i > 0; i--) {
 
-            Log.d("HOME TEAM", f.getHomeTeam());
+            Fixture f = team.getFixture(i - 1);
 
             fixtureContainer = new LinearLayout(getActivity());
             fixtureContainer.setLayoutParams(fixtureContainerParams);
             fixtureContainer.setOrientation(LinearLayout.HORIZONTAL);
+            fixtureContainer.setPadding(15, 0, 25, 0);
 
             homeTeam = new TextView(getActivity());
             teamNameParams.setMargins(0, 0, 10, 0);
