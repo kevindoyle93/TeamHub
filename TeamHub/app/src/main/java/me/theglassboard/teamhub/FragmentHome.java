@@ -118,47 +118,6 @@ public class FragmentHome extends Fragment {
         return view;
     }
 
-    public void readData() {
-
-        /**
-         *  Create an ObjectManager object to check if the user has already downloaded the information
-         */
-        String teamsFileName = "teamsJSONArray";
-        String fixturesFileName = "fixturesJSONArray";
-        String currentTeamFilename = "currentTeam";
-        ObjectManager jsonManager = new ObjectManager(currentActivity);
-
-        if(jsonManager.fileExists(teamsFileName)) {
-
-            JSONParser parser = new JSONParser();
-
-            Object obj;
-            try {
-
-                obj = jsonManager.readObject(teamsFileName);
-                obj = parser.parse((String) obj);
-                teamsJson = (JSONArray)obj;
-
-                obj = parser.parse((String)jsonManager.readObject(fixturesFileName));
-                fixturesJson = (JSONArray)obj;
-
-                findCurrentTeam((String)jsonManager.readObject(currentTeamFilename));
-            }
-            catch (ParseException e) {
-
-                Log.d("Exception", "Couldn't load files", e);
-            }
-
-            makeTeams();
-        }
-        else {
-            // Run the LoadInfoActivity
-            Intent loadInfo = new Intent(currentActivity, LoadInfo.class);
-            startActivity(loadInfo);
-        }
-
-    }
-
     public void makeTeams() {
 
         teams = new ArrayList<>();

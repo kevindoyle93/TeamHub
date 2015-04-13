@@ -96,6 +96,9 @@ public class LoadInfo extends ActionBarActivity {
 
                         if(position >= 0)
                             fetchData(divisions[position].getId());
+
+                        Toast fetchingTeams = Toast.makeText(getApplicationContext(), "Fetching teams", Toast.LENGTH_SHORT);
+                        fetchingTeams.show();
                     }
 
                     @Override
@@ -158,10 +161,9 @@ public class LoadInfo extends ActionBarActivity {
             teamsArray.add(teams.get(i));
         }
 
-        setTeamDropdown();
     }
 
-    private void setTeamDropdown() {
+    public void makeTeamDropdown() {
 
         // List the teams according to the division
         final Spinner teamDropdown = (Spinner)findViewById(R.id.teamsDropdown);

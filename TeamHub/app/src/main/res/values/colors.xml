@@ -3,5 +3,6 @@
 
     <color name="background_dark">#ff115bc1</color>
     <color name="background_light">#ff1064ff</color>
+    <color name="lighter_gray">#aaaaaa</color>
 
 </resources>

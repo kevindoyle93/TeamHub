@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -123,6 +125,7 @@ public class DataFetcher extends AsyncTask<String, Void, Void> {
 
                 ((LoadInfo) myActivity).setTeamsArray(teamObjects);
                 ((LoadInfo) myActivity).setFixtures(fixturesJson);
+                ((LoadInfo) myActivity).makeTeamDropdown();
             }
 
         } catch(ParseException pe) {

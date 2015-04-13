@@ -145,28 +145,28 @@ public class LeagueStats {
         playedTextView = new TextView(myActivity);
         playedTextView.setText(stats[1]);
         playedTextView.setLayoutParams(statsParams);
-        playedTextView.setTextColor(Color.DKGRAY);
+        playedTextView.setTextColor(Color.parseColor("#aaaaaa"));
         playedTextView.setGravity(Gravity.CENTER);
         row.addView(playedTextView);
 
         wonTextView = new TextView(myActivity);
         wonTextView.setText(stats[2]);
         wonTextView.setLayoutParams(statsParams);
-        wonTextView.setTextColor(Color.DKGRAY);
+        wonTextView.setTextColor(Color.parseColor("#aaaaaa"));
         wonTextView.setGravity(Gravity.CENTER);
         row.addView(wonTextView);
 
         drawnTextView = new TextView(myActivity);
-        drawnTextView.setText(stats[2]);
+        drawnTextView.setText(stats[3]);
         drawnTextView.setLayoutParams(statsParams);
-        drawnTextView.setTextColor(Color.DKGRAY);
+        drawnTextView.setTextColor(Color.parseColor("#aaaaaa"));
         drawnTextView.setGravity(Gravity.CENTER);
         row.addView(drawnTextView);
 
         lostTextView = new TextView(myActivity);
-        lostTextView.setText(stats[2]);
+        lostTextView.setText(stats[4]);
         lostTextView.setLayoutParams(statsParams);
-        lostTextView.setTextColor(Color.DKGRAY);
+        lostTextView.setTextColor(Color.parseColor("#aaaaaa"));
         lostTextView.setGravity(Gravity.CENTER);
         row.addView(lostTextView);
 
