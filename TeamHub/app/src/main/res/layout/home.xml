@@ -52,7 +52,6 @@
                 android:layout_weight="0.39"
                 android:textColor="@color/primary_text_default_material_dark"
                 android:padding="5dp"
-                android:background="@drawable/abc_cab_background_top_mtrl_alpha"
                 android:gravity="center_horizontal" />
 
             <TextView
@@ -93,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/Sections">
 
+                <!--
                 <FrameLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -268,7 +268,7 @@
 
                     </LinearLayout>
 
-                </FrameLayout>
+                </FrameLayout>-->
 
             </LinearLayout>
         </ScrollView>

@@ -49,6 +49,22 @@ public class Team {
 
     public LeagueStats getLeagueStats() { return leagueStats; }
 
+    public Fixture getFixture(int i) { return fixtures.get(i); }
+
+    public int numberOfFixtures() { return fixtures.size(); }
+
+    public int getLatestMatch() {
+
+        int fixtureCount = 0;
+
+        while(fixtureCount < fixtures.size() - 1 && fixtures.get(fixtureCount).getHomeScore() != null) {
+
+            fixtureCount++;
+        }
+
+        return fixtureCount;
+    }
+
 
     public void addToFixtures(Fixture f) {
 
@@ -72,14 +88,7 @@ public class Team {
 
         if(fixtures.size() > 0) {
 
-            int fixtureCount = 0;
-
-            while(fixtureCount < fixtures.size() - 1 && fixtures.get(fixtureCount).getHomeScore() != null) {
-
-                fixtureCount++;
-            }
-
-            fixtures.get(fixtureCount).setViews(myActivity);
+            // fixtures.get(getLatestMatch()).setViews(myActivity);
         }
     }
 }

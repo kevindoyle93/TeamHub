@@ -28,18 +28,8 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Home"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".FixtureList"
             android:label="@string/title_activity_fixture_list" >
-        </activity>
-        <activity
-            android:name=".MainWithFragment"
-            android:label="@string/title_activity_main_with_fragment" >
         </activity>
     </application>
 

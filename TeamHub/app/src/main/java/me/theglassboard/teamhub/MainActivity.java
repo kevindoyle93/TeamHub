@@ -1,20 +1,16 @@
 package me.theglassboard.teamhub;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -24,15 +20,24 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends FragmentActivity {
+
+    private JSONArray teamsJson;
+    private JSONArray fixturesJson;
+    private int currentTeamPosition;
+    private JSONObject currentTeam;
+    private ArrayList<Team> teams;
+
+    private Fragment fragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        fragment = null;
 
         super.onCreate(savedInstanceState);
 
@@ -65,9 +70,6 @@ public class MainActivity extends ActionBarActivity {
                 Log.d("Exception", "Couldn't load files", e);
             }
 
-            setContentView(R.layout.home);
-            makeTeams();
-            setListeners();
         }
         else {
             // Run the LoadInfoActivity
@@ -75,27 +77,29 @@ public class MainActivity extends ActionBarActivity {
             startActivity(loadInfo);
         }
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        setContentView(R.layout.home);
+        setListeners();
 
         FragmentHome homeFragment = new FragmentHome();
-        fragmentTransaction.replace(R.id.Sections, homeFragment);
+        homeFragment.setCurrentTeam(currentTeam);
+        homeFragment.setCurrentTeamPosition(currentTeamPosition);
+        homeFragment.setFixturesJson(fixturesJson);
+        homeFragment.setTeams(teams);
+        homeFragment.setTeamsJson(teamsJson);
 
-        /*FragmentFixtures fixturesFragment = new FragmentFixtures();
-        fragmentTransaction.replace(R.id.Sections, fixturesFragment);*/
+        switchContent(homeFragment);
 
-        fragmentTransaction.commit();
+        //makeTeams();
+        // ((FragmentHome)fragment).readData();
 
     }
 
+    public void setTextViews(TextView textView) {
 
-    private JSONArray teamsJson;
-    private JSONArray fixturesJson;
+        textView.setText("TEAM!");
+        //textView.setText(teams.get(currentTeamPosition).getFixture(teams.get(currentTeamPosition).getLatestMatch()).getHomeTeam());
+    }
 
-    private int currentTeamPosition;
-    private JSONObject currentTeam;
-
-    private ArrayList<Team> teams;
 
     public void makeTeams() {
 
@@ -146,10 +150,12 @@ public class MainActivity extends ActionBarActivity {
             }
         }
 
-        teams.get(currentTeamPosition).setViews(this);
+        //setTextViews();
+
+        //teams.get(currentTeamPosition).setViews(this);
 
         // TODO: make the league table
-        createLeagueTable();
+        //createLeagueTable();
     }
 
     private void createLeagueTable() {
@@ -228,13 +234,28 @@ public class MainActivity extends ActionBarActivity {
 
     private void setListeners() {
 
+        final TextView homButton = (TextView)findViewById(R.id.homeButton);
+
+        homButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+
+                switchContent(new FragmentHome());
+            }
+        });
+
         TextView fixturesButton = (TextView)findViewById(R.id.fixturesButton);
 
         fixturesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                Intent fixturesScreen = new Intent(MainActivity.this, FixtureList.class);
-                startActivity(fixturesScreen);
+                switchContent(new FragmentFixtures());
+
+                // Change the highlighted TextView
+                /*TextView textViewToChange = (TextView)findViewById(R.id.fixturesButton);
+                Uri path = Uri.parse("android.resource://com.segf4ult.test/" + R.drawable.abc_cab_background_top_mtrl_alpha);
+                Drawable underline = Drawable.createFromPath(path);
+                textViewToChange.setBackground(underline);*/
+
             }
         });
 
@@ -243,11 +264,23 @@ public class MainActivity extends ActionBarActivity {
         leagueTablesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                Intent leagueTablesScreen = new Intent(MainActivity.this, FixtureList.class);
-                startActivity(leagueTablesScreen);
+                //switchContent();
             }
         });
     }
+
+    public void switchContent(Fragment fragment) {
+
+        this.fragment = fragment;
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.Sections, fragment)
+                .commit();
+
+        invalidateOptionsMenu();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

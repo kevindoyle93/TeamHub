@@ -1,6 +1,7 @@
 package me.theglassboard.teamhub;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -86,6 +87,7 @@ public class Fixture {
     public void setViews(Activity myActivity) {
 
         TextView textViewToChange = (TextView) myActivity.findViewById(R.id.homeTeam);
+        Log.d("HOME TEAM" , homeTeam);
         textViewToChange.setText(homeTeam);
 
         if (homeScore != null) {
