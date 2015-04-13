@@ -1,14 +1,109 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="me.theglassboard.teamhub.FragmentFixtures">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.theglassboard.teamhub.FragmentFixtures">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <TextView
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="This&apos;d be the fixtures"
-        android:id="@+id/Fix"
-        android:layout_gravity="center" />
+        android:id="@+id/scrollView"
+        android:background="#ffdddddd">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Sections">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/FixtureListFrame"
+                android:clickable="true"
+                android:layout_margin="10dp"
+                android:background="#ffffffff">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:weightSum="1"
+                    android:id="@+id/FixtureListLayout">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Fixtures"
+                        android:id="@+id/FixtureListHeading"
+                        android:textColor="#ff444444"
+                        android:gravity="top|center"
+                        android:background="@drawable/abc_cab_background_top_mtrl_alpha"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:minHeight="25dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Teams"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:id="@+id/homeTeam"
+                            android:textColor="#ff444444"
+                            android:gravity="center|right"
+                            android:layout_weight="1"
+                            android:layout_marginRight="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/homeScore"
+                            android:gravity="center"
+                            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                            android:textColor="@android:color/darker_gray" />
+
+                        <TextView
+                            android:layout_width="19dp"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:id="@+id/versus"
+                            android:textColor="@android:color/darker_gray"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/awayScore"
+                            android:gravity="center"
+                            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                            android:textColor="@android:color/darker_gray" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:id="@+id/awayTeam"
+                            android:layout_weight="1"
+                            android:gravity="left|center"
+                            android:textColor="#ff444444"
+                            android:layout_marginLeft="10dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

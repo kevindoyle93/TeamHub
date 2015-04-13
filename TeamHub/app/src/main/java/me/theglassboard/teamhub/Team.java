@@ -53,6 +53,8 @@ public class Team {
 
     public int numberOfFixtures() { return fixtures.size(); }
 
+    public ArrayList<Fixture> getAllFixtures() { return fixtures; }
+
     public int getLatestMatch() {
 
         int fixtureCount = 0;

@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
 
     private Fragment fragment;
     private FragmentHome homeFragment;
+    private FragmentFixtures fixturesFragment;
 
 
     @Override
@@ -76,12 +77,8 @@ public class MainActivity extends ActionBarActivity {
             makeTeams();
             setTextView((TextView)findViewById(R.id.teamName), teams.get(currentTeamPosition).getClub());
 
-            homeFragment = new FragmentHome();
-            homeFragment.setCurrentTeam(currentTeam);
-            homeFragment.setCurrentTeamPosition(currentTeamPosition);
-            homeFragment.setFixturesJson(fixturesJson);
-            homeFragment.setTeams(teams);
-            homeFragment.setTeamsJson(teamsJson);
+            setUpHomeFragment();
+            setUpFixturesFragment();
 
             switchContent(homeFragment);
 
@@ -99,6 +96,21 @@ public class MainActivity extends ActionBarActivity {
         textView.setText(text);
     }
 
+    private void setUpHomeFragment() {
+
+        homeFragment = new FragmentHome();
+        homeFragment.setCurrentTeam(currentTeam);
+        homeFragment.setCurrentTeamPosition(currentTeamPosition);
+        homeFragment.setFixturesJson(fixturesJson);
+        homeFragment.setTeams(teams);
+        homeFragment.setTeamsJson(teamsJson);
+    }
+
+    private void setUpFixturesFragment() {
+
+        fixturesFragment = new FragmentFixtures();
+        fixturesFragment.setTeam(teams.get(currentTeamPosition));
+    }
 
     public void makeTeams() {
 
@@ -216,7 +228,7 @@ public class MainActivity extends ActionBarActivity {
         fixturesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                switchContent(new FragmentFixtures());
+                switchContent(fixturesFragment);
 
                 // Change the highlighted TextView
                 /*TextView textViewToChange = (TextView)findViewById(R.id.fixturesButton);
