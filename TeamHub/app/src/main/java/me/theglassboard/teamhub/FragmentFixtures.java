@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ public class FragmentFixtures extends Fragment {
         LinearLayout fixtureContainer;
 
         LinearLayout.LayoutParams fixtureContainerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        fixtureContainerParams.setMargins(0, 0, 0, 8);
 
         LinearLayout.LayoutParams teamNameParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f);
         LinearLayout.LayoutParams scoreParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -58,7 +60,8 @@ public class FragmentFixtures extends Fragment {
             teamNameParams.setMargins(0, 0, 10, 0);
             homeTeam.setLayoutParams(teamNameParams);
             homeTeam.setText(f.getHomeTeam());
-            homeTeam.setGravity(Gravity.LEFT);
+            homeTeam.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
+            homeTeam.setGravity(Gravity.LEFT | Gravity.CENTER);
             fixtureContainer.addView(homeTeam);
 
             if(f.getHomeScore() != null) {
@@ -66,28 +69,40 @@ public class FragmentFixtures extends Fragment {
                 homeScore = new TextView(getActivity());
                 homeScore.setLayoutParams(scoreParams);
                 homeScore.setText(f.getHomeScore());
+                homeScore.setGravity(Gravity.CENTER);
+                homeScore.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
                 fixtureContainer.addView(homeScore);
-            }
 
-            versus = new TextView(getActivity());
-            versus.setLayoutParams(versusParams);
-            versus.setText("-");
-            versus.setGravity(Gravity.CENTER);
-            fixtureContainer.addView(versus);
-
-            if(f.getAwayScore() != null) {
+                versus = new TextView(getActivity());
+                versus.setLayoutParams(versusParams);
+                versus.setText("-");
+                versus.setGravity(Gravity.CENTER);
+                versus.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
+                fixtureContainer.addView(versus);
 
                 awayScore = new TextView(getActivity());
                 awayScore.setLayoutParams(scoreParams);
                 awayScore.setText(f.getAwayScore());
+                awayScore.setGravity(Gravity.CENTER);
+                awayScore.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
                 fixtureContainer.addView(awayScore);
+            }
+            else {
+
+                TextView date = new TextView(getActivity());
+                date.setLayoutParams(scoreParams);
+                date.setGravity(Gravity.CENTER);
+                date.setText(f.getDate());
+                date.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
+                fixtureContainer.addView(date);
             }
 
             awayTeam = new TextView(getActivity());
             teamNameParams.setMargins(10, 0, 0, 0);
             awayTeam.setLayoutParams(teamNameParams);
-            awayTeam.setGravity(Gravity.RIGHT);
+            awayTeam.setGravity(Gravity.RIGHT | Gravity.CENTER);
             awayTeam.setText(f.getAwayTeam());
+            awayTeam.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
             fixtureContainer.addView(awayTeam);
 
 

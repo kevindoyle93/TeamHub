@@ -105,7 +105,7 @@ public class FragmentHome extends Fragment {
         setView(versusView, "-");
 
         locationAndDateView = (TextView)view.findViewById(R.id.locationAndTime);
-        setView(locationAndDateView, f.getLocation() + ", " + f.getDate() + " " + f.getTime());
+        setView(locationAndDateView, f.getLocation() + ", " + f.getDate() + ", " + f.getTime());
 
         awayTeamView = (TextView)view.findViewById(R.id.awayTeam);
         setView(awayTeamView, f.getAwayTeam());
