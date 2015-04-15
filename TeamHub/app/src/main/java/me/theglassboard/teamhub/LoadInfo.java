@@ -58,8 +58,6 @@ public class LoadInfo extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_info);
 
-        checkForExistingFiles();
-
         // Create and populate the divisions array
         divisions = new Division[13];
         divisions[0] = new Division("Premier A", "1052");
@@ -78,6 +76,7 @@ public class LoadInfo extends ActionBarActivity {
 
         divisionsJson = new ArrayList<>();
         divisionChoice = -1;
+        checkForExistingFiles();
 
         // List the available divisions
         final Spinner divisionDropdown = (Spinner)findViewById(R.id.divisionsDropdown);
@@ -131,9 +130,11 @@ public class LoadInfo extends ActionBarActivity {
         // once this is chosen. The default teamChoice will be 0.
         teamChoice = 0;
 
-        if(divisionsJson == null) {
+        final Spinner teamDropdown = (Spinner) findViewById(R.id.teamsDropdown);
 
-            final Spinner teamDropdown = (Spinner) findViewById(R.id.teamsDropdown);
+        if(divisionsJson.size() == 0) {
+
+            // final Spinner teamDropdown = (Spinner) findViewById(R.id.teamsDropdown);
             ArrayList<String> items2 = new ArrayList<>();
             items2.add("Choose your division first");
             adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
@@ -142,6 +143,7 @@ public class LoadInfo extends ActionBarActivity {
         else {
 
             makeTeamDropdown();
+
         }
 
         Button btn = (Button)findViewById(R.id.open_activity_button);
