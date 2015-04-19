@@ -13,17 +13,17 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/container"
-        android:background="#ffdddddd">
+        android:layout_height="62dp"
+        android:id="@+id/TeamTitle"
+        android:background="#ff115bc1"
+        android:gravity="top">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:gravity="top"
-            android:id="@+id/TeamTitle"
-            android:background="#ff115bc1">
+            android:layout_height="match_parent"
+            android:weightSum="4"
+            android:id="@+id/nameAndMenu">
 
             <TextView
                 android:layout_width="match_parent"
@@ -31,71 +31,108 @@
                 android:textColor="@color/primary_text_default_material_dark"
                 android:id="@+id/teamName"
                 android:textSize="@dimen/abc_text_size_large_material"
+                android:layout_weight="3"
                 android:gravity="center" />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/menuButton"
+                android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
+                android:background="@color/background_dark"
+                android:layout_weight="1"
+                android:layout_gravity="right" />
         </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ScrollView"
+        android:background="#ffdddddd"
+        android:layout_below="@+id/TeamTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/MenuOptions">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Sections">
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_dark"
+        android:weightSum="4"
+        android:minHeight="40dp"
+        android:id="@+id/MenuOptions"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="false">
+
+        <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/homeButton"
+            android:layout_weight="1"
+            android:contentDescription="home_image"
+            android:src="@drawable/home"
             android:background="@color/background_dark"
-            android:weightSum="3"
-            android:minHeight="40dp"
-            android:id="@+id/MenuOptions"
-            android:layout_marginBottom="10dp">
+            android:layout_gravity="top"
+            android:layout_marginTop="2dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/home_tab"
-                android:id="@+id/homeButton"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:textColor="@color/primary_text_default_material_dark"
-                android:padding="5dp"
-                android:gravity="center_horizontal"
-                android:background="@color/background_light" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/see_full_fixtures"
-                android:id="@+id/fixturesButton"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:textColor="@color/primary_text_default_material_dark"
-                android:padding="5dp"
-                android:gravity="center_horizontal" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/see_full_table"
-                android:id="@+id/tableButton"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:textColor="@color/primary_text_default_material_dark"
-                android:padding="5dp"
-                android:clickable="true"
-                android:gravity="center_horizontal" />
-        </LinearLayout>
-
-        <ScrollView
+        <ImageButton
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/ScrollView"
-            android:background="#ffdddddd">
+            android:layout_height="wrap_content"
+            android:id="@+id/fixturesButton"
+            android:layout_weight="1"
+            android:contentDescription="fixtures_image"
+            android:src="@drawable/fixtures"
+            android:background="@color/background_dark"
+            android:layout_gravity="top"
+            android:layout_marginTop="2dp" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/Sections">
-            </LinearLayout>
-        </ScrollView>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tableButton"
+            android:layout_weight="1"
+            android:contentDescription="fixtures_image"
+            android:src="@drawable/table"
+            android:background="@color/background_dark"
+            android:layout_gravity="top"
+            android:layout_marginTop="2dp" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/trainingButton"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:contentDescription="fixtures_image"
+            android:src="@drawable/training"
+            android:background="@color/background_dark"
+            android:layout_marginTop="2dp" />
+
     </LinearLayout>
+
+    <!--<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        android:background="#ffdddddd"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1">
+
+    </LinearLayout>-->
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package me.theglassboard.teamhub;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -24,7 +26,7 @@ import org.json.simple.parser.ParseException;
 import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends /*ActionBar*/FragmentActivity {
 
     private JSONArray teamsJson;
     private JSONArray fixturesJson;
@@ -223,21 +225,21 @@ public class MainActivity extends ActionBarActivity {
 
     private void setListeners() {
 
-        TextView homButton = (TextView)findViewById(R.id.homeButton);
+        ImageButton homeButton = (ImageButton)findViewById(R.id.homeButton);
 
-        homButton.setOnClickListener(new View.OnClickListener(){
+        homeButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                TextView thisButton;
-                TextView oldButton;
+                ImageButton thisButton;
+                ImageButton oldButton;
 
                 // Change the highlighted TextView
-                thisButton = (TextView)findViewById(R.id.homeButton);
+                thisButton = (ImageButton)findViewById(R.id.homeButton);
 
                 if(fragment instanceof FragmentFixtures)
-                    oldButton = (TextView)findViewById(R.id.fixturesButton);
+                    oldButton = (ImageButton)findViewById(R.id.fixturesButton);
                 else
-                    oldButton = (TextView)findViewById(R.id.tableButton);
+                    oldButton = (ImageButton)findViewById(R.id.tableButton);
 
                 changeButtonColours(oldButton, thisButton);
 
@@ -245,21 +247,21 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        TextView fixturesButton = (TextView)findViewById(R.id.fixturesButton);
+        ImageButton fixturesButton = (ImageButton)findViewById(R.id.fixturesButton);
 
         fixturesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                TextView thisButton;
-                TextView oldButton;
+                ImageButton thisButton;
+                ImageButton oldButton;
 
                 // Change the highlighted TextView
-                thisButton = (TextView)findViewById(R.id.fixturesButton);
+                thisButton = (ImageButton)findViewById(R.id.fixturesButton);
 
                 if(fragment instanceof FragmentHome)
-                    oldButton = (TextView)findViewById(R.id.homeButton);
+                    oldButton = (ImageButton)findViewById(R.id.homeButton);
                 else
-                    oldButton = (TextView)findViewById(R.id.tableButton);
+                    oldButton = (ImageButton)findViewById(R.id.tableButton);
 
                 changeButtonColours(oldButton, thisButton);
 
@@ -267,21 +269,21 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        TextView leagueTablesButton = (TextView)findViewById(R.id.tableButton);
+        ImageButton leagueTablesButton = (ImageButton)findViewById(R.id.tableButton);
 
         leagueTablesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
-                TextView thisButton;
-                TextView oldButton;
+                ImageButton thisButton;
+                ImageButton oldButton;
 
                 // Change the highlighted TextView
-                thisButton = (TextView) findViewById(R.id.tableButton);
+                thisButton = (ImageButton) findViewById(R.id.tableButton);
 
                 if (fragment instanceof FragmentHome)
-                    oldButton = (TextView) findViewById(R.id.homeButton);
+                    oldButton = (ImageButton) findViewById(R.id.homeButton);
                 else
-                    oldButton = (TextView) findViewById(R.id.fixturesButton);
+                    oldButton = (ImageButton) findViewById(R.id.fixturesButton);
 
                 changeButtonColours(oldButton, thisButton);
 
@@ -302,7 +304,7 @@ public class MainActivity extends ActionBarActivity {
         invalidateOptionsMenu();
     }
 
-    private void changeButtonColours(TextView oldFragment, TextView newFragment) {
+    private void changeButtonColours(ImageButton oldFragment, ImageButton newFragment) {
 
         oldFragment.setBackgroundColor(getResources().getColor(R.color.background_dark));
         newFragment.setBackgroundColor(getResources().getColor(R.color.background_light));
