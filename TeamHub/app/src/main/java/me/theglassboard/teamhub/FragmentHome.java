@@ -29,6 +29,8 @@ public class FragmentHome extends Fragment {
     private JSONObject currentTeam;
     private ArrayList<Team> teams;
 
+    private ObjectManager objectManager;
+
 
     public void setFixturesJson(JSONArray fixturesJson) {
         this.fixturesJson = fixturesJson;
@@ -72,6 +74,8 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        objectManager = new ObjectManager(getActivity());
+
         /**
          * Inflate the layout for this fragment
          */
@@ -82,6 +86,8 @@ public class FragmentHome extends Fragment {
 
         // Assign the Views
         homeTeamView = (TextView)view.findViewById(R.id.homeTeam);
+        homeTeamView.isClickable();
+        setTeamListener(homeTeamView, f.getHomeTeam());
         setView(homeTeamView, f.getHomeTeam());
 
         if (f.getHomeScore() != null) {
@@ -108,6 +114,8 @@ public class FragmentHome extends Fragment {
         setView(locationAndDateView, f.getLocation() + ", " + f.getDate() + ", " + f.getTime());
 
         awayTeamView = (TextView)view.findViewById(R.id.awayTeam);
+        awayTeamView.isClickable();
+        setTeamListener(awayTeamView, f.getAwayTeam());
         setView(awayTeamView, f.getAwayTeam());
 
 
@@ -166,13 +174,6 @@ public class FragmentHome extends Fragment {
                 teams.get(currentTeamPosition).addToFixtures(f);
             }
         }
-
-        //teams.get(currentTeamPosition).setViews(currentActivity);
-
-        // TODO: make the league table
-        //createLeagueTable();
-
-        // setViews();
     }
 
     public TextView getHomeTeamView() { return homeTeamView; }
@@ -192,6 +193,7 @@ public class FragmentHome extends Fragment {
             for(int i = 0; i < teamsToDisplay; i++) {
 
                 TableRow row = teams.get(i).getLeagueStats().setViews(getActivity(), teams.get(i).getClub());
+                setTeamListener(row, teams.get(i).getClub());
                 leagueTable.addView(row);
             }
         }
@@ -200,6 +202,7 @@ public class FragmentHome extends Fragment {
             for(int i = (currentTeamPosition - teamsToDisplay + 1); i < teams.size(); i++) {
 
                 TableRow row = teams.get(i).getLeagueStats().setViews(getActivity(), teams.get(i).getClub());
+                setTeamListener(row, teams.get(i).getClub());
                 leagueTable.addView(row);
             }
         }
@@ -208,6 +211,7 @@ public class FragmentHome extends Fragment {
             for(int i = currentTeamPosition - 1; i < (currentTeamPosition - 1 + teamsToDisplay); i++) {
 
                 TableRow row = teams.get(i).getLeagueStats().setViews(getActivity(), teams.get(i).getClub());
+                setTeamListener(row, teams.get(i).getClub());
                 leagueTable.addView(row);
             }
         }
@@ -259,6 +263,36 @@ public class FragmentHome extends Fragment {
 
         currentActivity = activity;
 
+    }
+
+    private void setTeamListener(TextView teamView, final String teamName) {
+
+        teamView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Overwrite the team name file
+                objectManager.saveObject(teamName, "currentTeam");
+
+                // Reload the main page
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
+    }
+
+    private void setTeamListener(TableRow teamView, final String teamName) {
+
+        teamView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Overwrite the team name file
+                objectManager.saveObject(teamName, "currentTeam");
+
+                // Reload the main page
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
     }
 
 }

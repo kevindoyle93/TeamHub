@@ -1,5 +1,6 @@
 package me.theglassboard.teamhub;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,11 +17,14 @@ import android.widget.TextView;
 public class FragmentFixtures extends Fragment {
 
     private Team team;
+    private ObjectManager objectManager;
 
     public void setTeam(Team team) { this.team = team; }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        objectManager = new ObjectManager(getActivity());
 
         /**
          * Inflate the layout for this fragment
@@ -62,6 +66,8 @@ public class FragmentFixtures extends Fragment {
             homeTeam.setText(f.getHomeTeam());
             homeTeam.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
             homeTeam.setGravity(Gravity.LEFT | Gravity.CENTER);
+            homeTeam.isClickable();
+            setTeamListener(homeTeam, f.getHomeTeam());
             fixtureContainer.addView(homeTeam);
 
             if(f.getHomeScore() != null) {
@@ -107,6 +113,8 @@ public class FragmentFixtures extends Fragment {
             awayTeam.setGravity(Gravity.RIGHT | Gravity.CENTER);
             awayTeam.setText(f.getAwayTeam());
             awayTeam.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.abc_text_size_small_material));
+            awayTeam.isClickable();
+            setTeamListener(awayTeam, f.getAwayTeam());
             fixtureContainer.addView(awayTeam);
 
 
@@ -114,6 +122,21 @@ public class FragmentFixtures extends Fragment {
         }
 
         return view;
+    }
+
+    private void setTeamListener(TextView teamView, final String teamName) {
+
+        teamView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Overwrite the team name file
+                objectManager.saveObject(teamName, "currentTeam");
+
+                // Reload the main page
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
     }
 
 }

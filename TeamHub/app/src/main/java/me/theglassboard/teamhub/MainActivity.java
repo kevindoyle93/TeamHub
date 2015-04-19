@@ -5,15 +5,19 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -38,6 +42,8 @@ public class MainActivity extends /*ActionBar*/FragmentActivity {
     private FragmentHome homeFragment;
     private FragmentFixtures fixturesFragment;
     private FragmentTable tableFragment;
+
+    private ImageButton menuButton;
 
 
     @Override
@@ -78,6 +84,7 @@ public class MainActivity extends /*ActionBar*/FragmentActivity {
 
             setContentView(R.layout.home);
             setListeners();
+            createPopupMenu();
             makeTeams();
             setTextView((TextView) findViewById(R.id.teamName), teams.get(currentTeamPosition).getClub());
 
@@ -172,12 +179,6 @@ public class MainActivity extends /*ActionBar*/FragmentActivity {
             }
         }
 
-        //setTextViews();
-
-        //teams.get(currentTeamPosition).setViews(this);
-
-        // TODO: make the league table
-        //createLeagueTable();
     }
 
 
@@ -306,8 +307,45 @@ public class MainActivity extends /*ActionBar*/FragmentActivity {
 
     private void changeButtonColours(ImageButton oldFragment, ImageButton newFragment) {
 
-        oldFragment.setBackgroundColor(getResources().getColor(R.color.background_dark));
-        newFragment.setBackgroundColor(getResources().getColor(R.color.background_light));
+        oldFragment.setBackground(null);
+        newFragment.setBackground(getResources().getDrawable(R.drawable.abc_textfield_search_activated_mtrl_alpha));
+    }
+
+    private void createPopupMenu() {
+
+        menuButton = (ImageButton)findViewById(R.id.menuButton);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doPopup();
+            }
+        });
+    }
+
+    private void doPopup() {
+
+        PopupMenu popupMenu = new PopupMenu(this, menuButton);
+        popupMenu.setOnMenuItemClickListener(
+                new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        int id = item.getItemId();
+
+                        if (id == R.id.action_settings) {
+
+                            startActivity(new Intent(MainActivity.this, LoadInfo.class));
+                            return true;
+                        }
+
+                        return false;
+                    }
+                }
+        );
+
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.menu_main, popupMenu.getMenu());
+        popupMenu.show();
     }
 
 
@@ -315,6 +353,7 @@ public class MainActivity extends /*ActionBar*/FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 

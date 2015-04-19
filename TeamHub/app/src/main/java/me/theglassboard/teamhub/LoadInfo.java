@@ -111,10 +111,12 @@ public class LoadInfo extends ActionBarActivity {
 
                             fetchData(divisions[position].getId());
 
-                            Toast fetchingTeams = Toast.makeText(getApplicationContext(), "Fetching teams in: " + divisions[position].getName(), Toast.LENGTH_SHORT);
+                            Toast fetchingTeams = Toast.makeText(getApplicationContext(), "Fetching teams in: " + divisions[position].getName(), Toast.LENGTH_LONG);
                             fetchingTeams.show();
 
                             divisionChosen = true;
+
+                            resetTeamsDropdown();
                         }
 
                     }
@@ -130,15 +132,9 @@ public class LoadInfo extends ActionBarActivity {
         // once this is chosen. The default teamChoice will be 0.
         teamChoice = 0;
 
-        final Spinner teamDropdown = (Spinner) findViewById(R.id.teamsDropdown);
-
         if(divisionsJson.size() == 0) {
 
-            // final Spinner teamDropdown = (Spinner) findViewById(R.id.teamsDropdown);
-            ArrayList<String> items2 = new ArrayList<>();
-            items2.add("Choose your division first");
-            adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
-            teamDropdown.setAdapter(adapter2);
+            resetTeamsDropdown();
         }
         else {
 
@@ -217,7 +213,6 @@ public class LoadInfo extends ActionBarActivity {
             Log.d("ERROR", "LOADING PREVIOUS FILES");
         }
 
-
     }
 
     public void setFixtures(String fixtures) { this.fixtures = fixtures; }
@@ -280,6 +275,19 @@ public class LoadInfo extends ActionBarActivity {
         );
 
         teamsLoaded = true;
+    }
+
+    private void resetTeamsDropdown() {
+
+        final Spinner teamDropdown = (Spinner) findViewById(R.id.teamsDropdown);
+
+        // final Spinner teamDropdown = (Spinner) findViewById(R.id.teamsDropdown);
+        ArrayList<String> items2 = new ArrayList<>();
+        items2.add("Choose your division first");
+        ArrayAdapter adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items2);
+        teamDropdown.setAdapter(adapter2);
+
+        teamsLoaded = false;
     }
 
     public void noResponseFromInternet() {

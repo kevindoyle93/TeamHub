@@ -13,17 +13,53 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_height="150dp"
         android:id="@+id/TeamTitle"
         android:background="#ff115bc1"
         android:gravity="top">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="4"
             android:id="@+id/nameAndMenu">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/TitleAndMenu"
+                android:layout_weight="2.7">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/app_name"
+                    android:id="@+id/AppTitle"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/abc_text_size_medium_material"
+                    android:gravity="left|center_vertical"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp" />
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/menuButton"
+                    android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
+                    android:background="@color/background_dark"
+                    android:contentDescription="menuButton"
+                    android:layout_weight="5"
+                    android:clickable="true"
+                    android:nestedScrollingEnabled="false" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/clubCrest"
+                android:layout_weight="4" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -31,17 +67,9 @@
                 android:textColor="@color/primary_text_default_material_dark"
                 android:id="@+id/teamName"
                 android:textSize="@dimen/abc_text_size_large_material"
-                android:layout_weight="3"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_weight="1" />
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:id="@+id/menuButton"
-                android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
-                android:background="@color/background_dark"
-                android:layout_weight="1"
-                android:layout_gravity="right" />
         </LinearLayout>
 
     </LinearLayout>
@@ -69,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background_dark"
-        android:weightSum="4"
+        android:weightSum="3"
         android:minHeight="40dp"
         android:id="@+id/MenuOptions"
         android:gravity="bottom"
@@ -85,9 +113,8 @@
             android:layout_weight="1"
             android:contentDescription="home_image"
             android:src="@drawable/home"
-            android:background="@color/background_dark"
-            android:layout_gravity="top"
-            android:layout_marginTop="2dp" />
+            android:background="@drawable/abc_textfield_search_activated_mtrl_alpha"
+            android:layout_gravity="top" />
 
         <ImageButton
             android:layout_width="match_parent"
@@ -97,8 +124,7 @@
             android:contentDescription="fixtures_image"
             android:src="@drawable/fixtures"
             android:background="@color/background_dark"
-            android:layout_gravity="top"
-            android:layout_marginTop="2dp" />
+            android:layout_gravity="top" />
 
         <ImageButton
             android:layout_width="match_parent"
@@ -108,10 +134,9 @@
             android:contentDescription="fixtures_image"
             android:src="@drawable/table"
             android:background="@color/background_dark"
-            android:layout_gravity="top"
-            android:layout_marginTop="2dp" />
+            android:layout_gravity="top" />
 
-        <ImageButton
+        <!--<ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/trainingButton"
@@ -119,20 +144,8 @@
             android:layout_weight="1"
             android:contentDescription="fixtures_image"
             android:src="@drawable/training"
-            android:background="@color/background_dark"
-            android:layout_marginTop="2dp" />
+            android:background="@color/background_dark" />-->
 
     </LinearLayout>
-
-    <!--<LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/container"
-        android:background="#ffdddddd"
-        android:layout_alignParentBottom="true"
-        android:weightSum="1">
-
-    </LinearLayout>-->
 
 </RelativeLayout>
